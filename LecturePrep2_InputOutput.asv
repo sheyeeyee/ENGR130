@@ -40,6 +40,7 @@
     % Result will print in Command Window
 %% Output Method 2: disp()
     % Displays value of variable (numbers of text)
+    clc;
     % Example
         gold2 = 72;
         element = 'Gold';
@@ -49,12 +50,4 @@
 %% Output Method 3: fprintf()
     % Most powerful option
         % Format: fprintf('text and formats', variables/values to insert)
-    % Example
-        % How can we output "My favorite element is __. Its atomic number
-        % is __ and its atomic weight is __ AMUs." where we fill in the
-        % blanks using values stored in variables?
-        number = 10;
-        element2 = 'neon';
-        weight = 20.18;
-
-        fprintf('My favorite element is %s. Its atomic number is %i and its atomic weight is %f AMUs.\n', element, number, weight)
+       
