@@ -54,7 +54,37 @@
         % is __ and its atomic weight is __ AMUs." where we fill in the
         % blanks using values stored in variables?
         number = 10;
-        element2 = 'neon';
+        element = 'neon';
         weight = 20.18;
 
         fprintf('My favorite element is %s. Its atomic number is %i and its atomic weight is %f AMUs.\n', element, number, weight)
+            % The percent signs are like "fill-in-the-blank" (format
+            % specifiers)
+                % In this case, %s is the first text blank, so it's filled
+                % with element2 (string)
+                % %i is an integer blank, so filled by number
+                % %f is a float blank, so filled by a number with decimals
+
+                % i or d: integer
+                % f: floating point (real numbers)
+                % s: string (text)
+                % c: character
+                % e: exponential notation
+            % Controlling Decimal Places
+                % %f --> %.#f
+                % Example
+                    % 20.18, but it prints 20.180000 with %f, so you change
+                    % it to %.2f for 2 decimal places
+                        fprintf('My favorite element is %s. Its atomic number is %i and its atomic weight is %.2f AMUs.\n', element2, number, weight)
+
+%% Practice 2
+    % Make the following mods to Practice 1 using fprintf with format
+    % specifiers and variable names:
+        % print a greeting to the screen that includes the person's name
+        % ask the user if they like being the age that they are, using the
+        % number for their age
+
+    firstName = input("What's your name?\n",'s');
+    age = input('How old are you?\n');
+
+    fprintf('Hi %s! Do you like being %i years old?\n', firstName, age)
