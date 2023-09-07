@@ -29,13 +29,13 @@ h = 6.626e-34;
 % mass of proton
 m = 1.67e-27;
 
-% speeds of protons in km/s
-speed1 = 2.7e4/1000;
-speed2 = 4.3e5/1000;
+% speeds of protons in m/s
+speed1 = 2.7e4;
+speed2 = 4.3e5;
 
-% deBroglie wavelengths in nm
-lambda1 = h/(m*speed1*1e12);
-lambda2 = h/(m*speed2*1e12);
+% deBroglie wavelengths in m
+lambda1 = h/(m*speed1);
+lambda2 = h/(m*speed2);
 
 % average wavelength
 lambdaAvg = (lambda1 + lambda2)/2;
@@ -44,12 +44,12 @@ lambdaAvg = (lambda1 + lambda2)/2;
 fprintf('Mass of proton: %.2e\n', m);
 
 % display speeds
-fprintf('\nSpeed of proton 1: %.2f km/s\n', speed1);
-fprintf('Speed of proton 2: %.2f km/s\n', speed2);
+fprintf('\nSpeed of proton 1: %.2f km/s\n', speed1/1000); % keep the original variable the same
+fprintf('Speed of proton 2: %.2f km/s\n', speed2/1000);
 
 % display wavelengths
-fprintf('\nWavelength of proton 1: %.4e nm\n', lambda1);
-fprintf('Wavelength of proton 2: %.4e nm\n', lambda2);
+fprintf('\nWavelength of proton 1: %.4e nm\n', lambda1*1000000000);
+fprintf('Wavelength of proton 2: %.4e nm\n', lambda2*1000000000);
 
 % display average wavelength of both
 fprintf('\nAverage wavelength of both protons: %.4e nm\n', lambdaAvg);

@@ -62,3 +62,22 @@ minM = min(M)
 minMinM = min(min(M))
 
 %% Practice 4
+clear;
+clc;
+close all;
+
+denominators = [1:5] % create vector for denominators of elements of harmonic series
+harmSeries = 1./denominators % reciprocate denominators
+% harmSeries = 1/denominators % reciprocate denominators (you can't divide
+% a scalar by a matrix)
+
+sum(harmSeries)
+
+%% Testing %i and %d (since they have no difference in MATLAB)
+clear;
+clc;
+close all;
+
+var = 1.5;
+fprintf('%d\n', var)
+fprintf('%i\n',var)

@@ -1,6 +1,7 @@
 % Shelley Wei
 % ENGR 130 Homework 3
-% 9/6/23
+% Started 9/6/23
+% Due 9/13/23
 
 %% Question 2
 clear;
@@ -50,7 +51,21 @@ close all;
 h = 6.626e-34;
 
 % masses of particles in vector mass
+mass = [1.6726e-27, 1.6726e-27, 1.6749e-27, 1.6749e-27, 6.6447e-27];
 
-
-% speeds of protons in vector speed
+% speeds of protons in vector speed (m/s)
 speed = [2.7e4, 4.3e5, 1.5e4, 3.6e5, 8.6e5];
+
+% deBroglie wavelengths in nm (convert from m to nm)
+lambda = h./(mass.*speed)*1e9; % scientific notation always has to have a number/variable before it, no operations, otherwise MATLAB will think "e" is a variable
+% lambda = h./(mass.*speed)e9; <-- this wouldn't work
+% lambda = h./(mass.*speed)*e9; <-- this wouldn't work
+
+fprintf('The minimum possible deBroglie wavelength is %.4f nm.\n', min(lambda));
+fprintf('For this set, the average deBroglie wavelength is %.4f nm.\n', sum(lambda)./length(lambda)); % can't use size() bc vectors are matrices and size gives dimensions even if it's 1x#
+
+deviceNum = input('What is the number of the device that you would like to know about?\n');
+fprintf('Here are the details for device %i:\n', deviceNum);
+fprintf('   Mass of particle: %.2e kg\n', mass(deviceNum));
+fprintf('   Speed of particle: %.2f km/s\n', speed(deviceNum)/1e3); % converting m/s to km/s
+fprintf('   deBroglie wavelength: %.4f nm\n', lambda(deviceNum));
