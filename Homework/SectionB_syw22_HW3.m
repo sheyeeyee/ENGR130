@@ -42,3 +42,15 @@ total_2 = sum(tot_length)
 check = total_1 - total_2
 
 %% Question 3
+clear;
+clc;
+close all;
+
+% Planck's constant in joule-seconds
+h = 6.626e-34;
+
+% masses of particles in vector mass
+
+
+% speeds of protons in vector speed
+speed = [2.7e4, 4.3e5, 1.5e4, 3.6e5, 8.6e5];
