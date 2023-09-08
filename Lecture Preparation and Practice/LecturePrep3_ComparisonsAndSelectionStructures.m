@@ -2,7 +2,7 @@
 % ENGR 130
 % Lecture Preparation 2
 % Started 9/8/23
-% Finished 9//23
+% Finished 9/8/23
 % Due 9/12/23
 
 %% COMPARISON AND SELECTION STRUCTURES
