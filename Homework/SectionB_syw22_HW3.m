@@ -43,6 +43,9 @@ total_2 = sum(tot_length)
 check = total_1 - total_2
 
 %% Question 3
+% the following housekeeping commands also mean that only the last section
+% will be displayed if you try to run all sections (since these commands
+% will clear anything that happened before them)
 clear;
 clc;
 close all;
@@ -66,6 +69,6 @@ fprintf('For this set, the average deBroglie wavelength is %.4f nm.\n', sum(lamb
 
 deviceNum = input('What is the number of the device that you would like to know about?\n');
 fprintf('Here are the details for device %i:\n', deviceNum);
-fprintf('   Mass of particle: %.2e kg\n', mass(deviceNum));
+fprintf('   Mass of particle: %.2E kg\n', mass(deviceNum)); % the display is case sensitive to scientific notation (so if you put a lowercase e for the data type, it would show lowercase e for scientific notation)
 fprintf('   Speed of particle: %.2f km/s\n', speed(deviceNum)/1e3); % converting m/s to km/s
 fprintf('   deBroglie wavelength: %.4f nm\n', lambda(deviceNum));
