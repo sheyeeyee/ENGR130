@@ -1,6 +1,7 @@
 % Shelley Wei
 % ENGR 130 Homework 3
 % Started 9/6/23
+% Finished 9/8/23
 % Due 9/13/23
 
 %% Question 2
@@ -53,7 +54,7 @@ close all;
 % Planck's constant in joule-seconds
 h = 6.626e-34;
 
-% masses of particles in vector mass
+% masses of particles in vector mass in kg
 mass = [1.6726e-27, 1.6726e-27, 1.6749e-27, 1.6749e-27, 6.6447e-27];
 
 % speeds of protons in vector speed (m/s)
