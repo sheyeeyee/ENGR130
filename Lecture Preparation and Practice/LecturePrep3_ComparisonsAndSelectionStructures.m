@@ -76,3 +76,7 @@ z = 15;
 if (x < z+y-x) % wow... you don't need parenthesis
     fprintf('print\n')
 end
+
+disp(x + y + 'hello')
+disp(0 + 'hello')
+disp("hello" + x)
