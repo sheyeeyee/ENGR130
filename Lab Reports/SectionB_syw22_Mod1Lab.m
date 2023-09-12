@@ -28,5 +28,50 @@ c2 = [a2(1), a2(3); a2(2), a2(3); a2(4), a2(5)] % another 3x2 matrix
 d2 = c2 + b2 % add c2 and b2
 e2 = b2 - c2 % subtract c2 from b2
 f2 = b2 .* c2 % multiply c2 and b2
-g2 = max(c2)
-h2 = max(c2')
+g2 = max(c2) % max of each column in c2
+h2 = max(c2') % max of each row in c2
+i2 = max(max(c2)) % max of c2
+j2 = sum(sum(c2)) % sum of c2
+
+%% 3. User input and output
+clear;
+clc;
+close all;
+
+ckWh = 0.066;
+x = input("Please enter the number of kilowatt hours (kWh) used this month: ");
+c = ckWh * x;
+fprintf("Your charge for %.2f kWh will be $%.2f.\n", x, c);
+
+%% LAB 2: VECTORS AND LOOPS
+%% 4. Vectors and Loops
+clear;
+clc;
+close all;
+
+n = 10; % number of integers in the vector (this variable will be used multiple times)
+max = 100; % maximum value an integer can be
+
+randomInt = randi(max,1,n); % create 1x10 vector of 10 random integers btwn 1 and 100
+sumRandomInt = 0; % create sum variable to use in for loop later
+
+ % use loop to add every integer of the vector randomInt to a variable that will eventually be the sum of all the integers
+for i = 1:10
+    sumRandomInt = sumRandomInt + randomInt(i);
+end
+
+x = sumRandomInt / n; % find the average of randomInt's values w/o function
+xM = mean(randomInt); % find the average of randomInt's values w/ function
+
+sumRandomIntMinusAvg = 0; % create sum variable for numerator of the fraction in the std deviation formula
+
+% use loop to add the difference between every data point and the average of all numbers in the randomInt vector squared to a variable that will eventually be the sum of all of it
+for i = 1:10
+    sumRandomIntMinusAvg = sumRandomIntMinusAvg + (randomInt(i) - x)^2;
+end
+
+s = sqrt(sumRandomIntMinusAvg / (n - 1)); % calculate std deviation of randomInt's values w/o function
+sTd = std(randomInt); % calculate std deviation of randomInt's values w/ function
+
+fprintf("CALCULATIONS W/O BUILT-IN MATLAB FUNCTIONS\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", x, s);
+fprintf("\nCALCULATIONS W/ BUILT-IN MATLAB FUNCTIONS mean() FOR AVERAGE AND std() FOR STANDARD DEVIATION\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, sTd);
