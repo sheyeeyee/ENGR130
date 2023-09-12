@@ -2,7 +2,7 @@
 % ENGR 130
 % Module 1 Lab
 % Started 9/11/23
-% Finished 9//23
+% Submitted 9//23
 % Due 9/18/23
 
 %% LAB 1: MATLAB VECTORS, MATRICES, INPUT AND OUTPUT
@@ -60,7 +60,7 @@ for i = 1:10
     sumRandomInt = sumRandomInt + randomInt(i);
 end
 
-x = sumRandomInt / n; % find the average of randomInt's values w/o function
+x = sumRandomInt / n; % find the average of randomInt's values w/o function (n is used here again)
 xM = mean(randomInt); % find the average of randomInt's values w/ function
 
 sumRandomIntMinusAvg = 0; % create sum variable for numerator of the fraction in the std deviation formula
@@ -73,5 +73,28 @@ end
 s = sqrt(sumRandomIntMinusAvg / (n - 1)); % calculate std deviation of randomInt's values w/o function
 sTd = std(randomInt); % calculate std deviation of randomInt's values w/ function
 
+% print and compare the hand-calculated and function-calculated values
 fprintf("CALCULATIONS W/O BUILT-IN MATLAB FUNCTIONS\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", x, s);
-fprintf("\nCALCULATIONS W/ BUILT-IN MATLAB FUNCTIONS mean() FOR AVERAGE AND std() FOR STANDARD DEVIATION\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, sTd);
+fprintf("\nCALCULATIONS W/ THE BUILT-IN MATLAB FUNCTIONS mean() (AVERAGE) AND std() (STANDARD DEVIATION)\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, sTd);
+
+%% 5. Vector Indices and Loops
+clear;
+clc;
+close all;
+
+userVector = input("Please input a vector of any length in the form [# # # ... #]: ");
+reverseVector = 0;
+
+% for i = length(userVector):-1:1
+%     reverseVector(i) = userVector(i)
+% end
+
+fprintf("Your inputted vector reversed: [");
+for i = length(userVector):-1:1
+    fprintf("%d", userVector(i)); % how do you include the space??
+end
+fprintf("]");
+
+% fprintf("The reverse of your inputted vector is: [%d]\n", reverseVector);
+
+%% LAB 3: INTERFACING MATLAB WITH AN ARDUINO
