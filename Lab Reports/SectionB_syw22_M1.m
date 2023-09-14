@@ -15,23 +15,23 @@ r1 = 80;
 r2 = 10;
 r3 = 15;
 rVector = [r1, r2, r3];
-rT = 1 / sum(1 ./ rVector)
+rT = 1 / sum(1 ./ rVector);
 
 %% 2. Matrices
 clear;
 clc;
 close all;
 
-a2 = [1:5] % integer values 1 through 5
-b2 = [2, 3; 4, 9; 4, 11] % 3x2 matrix
-c2 = [a2(1), a2(3); a2(2), a2(3); a2(4), a2(5)] % another 3x2 matrix
-d2 = c2 + b2 % add c2 and b2
-e2 = b2 - c2 % subtract c2 from b2
-f2 = b2 .* c2 % multiply c2 and b2
-g2 = max(c2) % max of each column in c2
-h2 = max(c2') % max of each row in c2
-i2 = max(max(c2)) % max of c2
-j2 = sum(sum(c2)) % sum of c2
+a2 = (1:5); % integer values 1 through 5
+b2 = [2, 3; 4, 9; 4, 11]; % 3x2 matrix
+c2 = [a2(1), a2(3); a2(2), a2(3); a2(4), a2(5)]; % another 3x2 matrix
+d2 = c2 + b2; % add c2 and b2
+e2 = b2 - c2; % subtract c2 from b2
+f2 = b2 .* c2; % multiply c2 and b2
+g2 = max(c2); % max of each column in c2
+h2 = max(c2'); % max of each row in c2
+i2 = max(max(c2)); % max of c2
+j2 = sum(sum(c2)); % sum of c2
 
 %% 3. User input and output
 clear;
@@ -98,3 +98,48 @@ fprintf("%i]\n", userVector(1));
 % fprintf("The reverse of your inputted vector is: [%d]\n", reverseVector);
 
 %% LAB 3: INTERFACING MATLAB WITH AN ARDUINO
+clear;
+clc;
+close all;
+
+a = arduino();
+
+% writeDigitalPin(<arduino>, <pin>, <on/off>
+% writeDigitalPin(a, 'D13', 1);
+% pause(1);
+% writeDigitalPin(a, 'D13', 0);
+
+% loop for turning LED on and off for 5 cycles
+for i = 1:5
+    writeDigitalPin(a, 'D13', 1);
+    pause(0.75);
+    writeDigitalPin(a, 'D13', 0);
+    pause(0.5);
+end
+
+%% 6. Conditionals
+clear;
+clc;
+close all;
+
+windStrength = input("Please input a value for wind strength between 0 and 12 inclusive: ");
+
+if (windStrength > -1 && windStrength < 13)
+    if (windStrength == 0)
+        fprintf("There is no wind.\n");
+    elseif (windStrength < 7)
+        fprintf("There is a breeze.\n");
+    elseif (windStrength < 10)
+        fprintf("This is a gale.\n");
+    elseif (windStrength < 12)
+        fprintf("It is a storm.\n");
+    else
+        fprintf("Hello, hurricane!\n");
+    end
+else
+    if (windStrength < 0)
+        error("The wind can't be that weak!");
+    else
+        error("The wind can't be that strong!");
+    end
+end
