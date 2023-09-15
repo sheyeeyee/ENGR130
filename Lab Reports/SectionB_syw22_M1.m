@@ -71,11 +71,11 @@ for i = 1:10
 end
 
 s = sqrt(sumRandomIntMinusAvg / (n - 1)); % calculate std deviation of randomInt's values w/o function
-sTd = std(randomInt); % calculate std deviation of randomInt's values w/ function
+stdDev = std(randomInt); % calculate std deviation of randomInt's values w/ function
 
 % print and compare the hand-calculated and function-calculated values
 fprintf("CALCULATIONS W/O BUILT-IN MATLAB FUNCTIONS\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", x, s);
-fprintf("\nCALCULATIONS W/ THE BUILT-IN MATLAB FUNCTIONS mean() (AVERAGE) AND std() (STANDARD DEVIATION)\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, sTd);
+fprintf("\nCALCULATIONS W/ THE BUILT-IN MATLAB FUNCTIONS mean() (AVERAGE) AND std() (STANDARD DEVIATION)\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, stdDev);
 
 %% 5. Vector Indices and Loops
 clear;
