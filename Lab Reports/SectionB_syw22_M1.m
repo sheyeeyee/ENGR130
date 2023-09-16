@@ -2,7 +2,7 @@
 % ENGR 130
 % Module 1 Lab
 % Started 9/11/23
-% Submitted 9//23
+% Submitted 9/15/23
 % Due 9/18/23
 
 %% LAB 1: MATLAB VECTORS, MATRICES, INPUT AND OUTPUT
