@@ -55,41 +55,34 @@ close all;
 
 % scores received from HW 4 file
 score = [59, 70, 88, 95, 92, 76, 94, 87, 82, 91, 88, 65, 86, 93, 88, 96, 92, 87, 30, 80];
-letterGrade = zeros;
+letterGrade = ["A", "B", "C", "D", "F"];
+numLetterGrade = [0 0 0 0 0];
 
-numA = 0;
-numB = 0;
-numC = 0;
-numD = 0;
-numF = 0;
-
-numLetterGrade = zeros;
-
+% print each student's score/grade and count the number of students that earn each grade (same loop for the sake of saving space and preventing repetitive code)
 for i = 1:length(score)
     if (score(i) < 60)
-        letterGrade(i) = "F";
         fprintf("Student %i: Score %i, Grade F\n", i, score(i));
         numLetterGrade(5) = numLetterGrade(5) + 1;
     elseif (score(i) < 70)
-        letterGrade(i) = "D";
         fprintf("Student %i: Score %i, Grade D\n", i, score(i));
         numLetterGrade(4) = numLetterGrade(4) + 1;
     elseif (score(i) < 80)
-        letterGrade(i) = "C";
         fprintf("Student %i: Score %i, Grade C\n", i, score(i));
-        numLetterGrade(4) = numLetterGrade(4) + 1;
+        numLetterGrade(3) = numLetterGrade(3) + 1;
     elseif (score(i) < 90)
-        letterGrade(i) = "B";
         fprintf("Student %i: Score %i, Grade B\n", i, score(i));
-        numB = numB + 1;
+        numLetterGrade(2) = numLetterGrade(2) + 1;
     elseif (score(i) < 100)
-        letterGrade(i) = "A";
         fprintf("Student %i: Score %i, Grade A\n", i, score(i));
-        numA = numA + 1;
+        numLetterGrade(1) = numLetterGrade(1) + 1;
     end
 end
 
 avgScore = mean(score);
-fprintf("The average score for the class is %.1f\n", avgScore);
+fprintf("\nThe average score for the class is %.1f.\n", avgScore);
 
-for (i = 1:)
+percentLetterGrade = numLetterGrade / length(score) * 100;
+
+for i = 1:length(numLetterGrade)
+    fprintf("%.1f percent of the class earned a(n) %s.\n", percentLetterGrade(i), letterGrade(i));
+end
