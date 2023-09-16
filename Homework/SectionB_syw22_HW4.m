@@ -46,6 +46,7 @@ for i = 1:length(sun)
     end
 end
 
+% testing
 % fprintf("%i, %i, %i, %i\n", defic, inadeq, adeq, excess);
 
 %% Question 3
@@ -59,7 +60,7 @@ letterGrade = ["A", "B", "C", "D", "F"];
 numLetterGrade = [0, 0, 0, 0, 0];
 
 % print each student's score/grade and count the number of students that earn each grade (same loop for the sake of saving space and preventing repetitive code)
-for i = 1:length(score) % iterate through the number of scores/students
+for i = 1:length(score) % iterate through the number of scores/students (use length() so the for-loop can run for any number of students)
     if (score(i) < 60)
         fprintf("Student %i: Score %i, Grade F\n", i, score(i)); % display the student's score and letter grade
         numLetterGrade(5) = numLetterGrade(5) + 1; % for each student with this letter grade, add 1 to keep count to later calculate the percentage of students that earn each letter grade
@@ -78,11 +79,14 @@ for i = 1:length(score) % iterate through the number of scores/students
     end
 end
 
+% calculate the average of all teh students' scores and display it
 avgScore = mean(score);
 fprintf("\nThe average score for the class is %.1f.\n", avgScore);
 
+% calculate the percent of students earning each grade using the vector that counted the number of grades in the previous for-loop
 percentLetterGrade = numLetterGrade / length(score) * 100;
 
+% display the percentages of students earning each letter grade using a for-loop so the same code isn't written over and over again just to change the percent and letter grade
 for i = 1:length(numLetterGrade)
     fprintf("%.1f percent of the class earned a(n) %s.\n", percentLetterGrade(i), letterGrade(i));
 end
