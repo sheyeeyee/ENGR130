@@ -15,7 +15,7 @@ r1 = 80;
 r2 = 10;
 r3 = 15;
 rVector = [r1, r2, r3];
-rT = 1 / sum(1 ./ rVector);
+rT = 1 / sum(1 ./ rVector); % divide a scalar by a vector; requires ./ rather than just /, or MATLAB won't know how to do it
 
 %% 2. Matrices
 clear;
@@ -38,7 +38,7 @@ clear;
 clc;
 close all;
 
-ckWh = 0.066;
+ckWh = 0.066; % set a variable for the cost per kilowatt-hour to be clear about what the number means
 x = input("Please enter the number of kilowatt hours (kWh) used this month: ");
 c = ckWh * x;
 fprintf("Your charge for %.2f kWh will be $%.2f.\n", x, c);
@@ -83,19 +83,19 @@ clc;
 close all;
 
 userVector = input("Please input a vector of any length in the form [# # # ... #]: ");
-reverseVector = 0;
+% reverseVector = 0; % initialize a vector to be added to (no longer needed)
 
 % for i = length(userVector):-1:1
 %     reverseVector(i) = userVector(i)
 % end
 
-fprintf("Reversed inputted vector: [");
-for i = length(userVector):-1:2
+fprintf("Reversed inputted vector: ["); % start the vector bracket display outside of the loop so it isn't reprinted every iteration
+for i = length(userVector):-1:2 % start at the end of the user's vector and end at the second index
     fprintf("%i ", userVector(i)); % how do you include the space??
 end
-fprintf("%i]\n", userVector(1));
+fprintf("%i]\n", userVector(1)); % end the vector bracket display outside the loop so it isn't repeated every iteration (and the last index so that there is no space between that and the end bracket
 
-% fprintf("The reverse of your inputted vector is: [%d]\n", reverseVector);
+% fprintf("The reverse of your inputted vector is: [%d]\n", reverseVector); (attempt at just displaying a vector without having to display each individual index...)
 
 %% LAB 3: INTERFACING MATLAB WITH AN ARDUINO
 clear;
@@ -126,7 +126,8 @@ close all;
 
 windStrength = input("Please input a value for wind strength between 0 and 12 inclusive: ");
 
-if (windStrength > -1 && windStrength < 13)
+% check if the user's input is valid
+if (windStrength > -1 && windStrength < 13) % if it's valid, print the corresponding statement about the wind strength
     if (windStrength == 0)
         fprintf("There is no wind.\n");
     elseif (windStrength < 7)
@@ -138,10 +139,10 @@ if (windStrength > -1 && windStrength < 13)
     else
         fprintf("Hello, hurricane!\n");
     end
-else
-    if (windStrength < 0)
+else % if the user's input isn't valid, throw and error depending on whether the value is too small or too large
+    if (windStrength < 0) % if the user, for some reason, input a negative value
         error("The wind can't be that weak!");
-    else
+    else % if the user input a huge value (greater than 12)
         error("The wind can't be that strong!");
     end
 end

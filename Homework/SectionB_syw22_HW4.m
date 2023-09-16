@@ -56,13 +56,13 @@ close all;
 % scores received from HW 4 file
 score = [59, 70, 88, 95, 92, 76, 94, 87, 82, 91, 88, 65, 86, 93, 88, 96, 92, 87, 30, 80];
 letterGrade = ["A", "B", "C", "D", "F"];
-numLetterGrade = [0 0 0 0 0];
+numLetterGrade = [0, 0, 0, 0, 0];
 
 % print each student's score/grade and count the number of students that earn each grade (same loop for the sake of saving space and preventing repetitive code)
-for i = 1:length(score)
+for i = 1:length(score) % iterate through the number of scores/students
     if (score(i) < 60)
-        fprintf("Student %i: Score %i, Grade F\n", i, score(i));
-        numLetterGrade(5) = numLetterGrade(5) + 1;
+        fprintf("Student %i: Score %i, Grade F\n", i, score(i)); % display the student's score and letter grade
+        numLetterGrade(5) = numLetterGrade(5) + 1; % for each student with this letter grade, add 1 to keep count to later calculate the percentage of students that earn each letter grade
     elseif (score(i) < 70)
         fprintf("Student %i: Score %i, Grade D\n", i, score(i));
         numLetterGrade(4) = numLetterGrade(4) + 1;
