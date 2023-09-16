@@ -74,8 +74,8 @@ s = sqrt(sumRandomIntMinusAvg / (n - 1)); % calculate std deviation of randomInt
 stdDev = std(randomInt); % calculate std deviation of randomInt's values w/ function
 
 % print and compare the hand-calculated and function-calculated values
-fprintf("CALCULATIONS W/O BUILT-IN MATLAB FUNCTIONS\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", x, s);
-fprintf("\nCALCULATIONS W/ THE BUILT-IN MATLAB FUNCTIONS mean() (AVERAGE) AND std() (STANDARD DEVIATION)\nAverage of random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, stdDev);
+fprintf("CALCULATIONS W/O BUILT-IN MATLAB FUNCTIONS\nAverage of ten random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", x, s);
+fprintf("\nCALCULATIONS W/ THE BUILT-IN MATLAB FUNCTIONS mean() (AVERAGE) AND std() (STANDARD DEVIATION)\nAverage of ten random integers between 1 and 100: %.1f\nStandard deviation of the same set of random integers: %.1f\n", xM, stdDev);
 
 %% 5. Vector Indices and Loops
 clear;
@@ -104,12 +104,14 @@ close all;
 
 a = arduino();
 
-% writeDigitalPin(<arduino>, <pin>, <on/off>
+% writeDigitalPin(<arduino>, <pin>, <on/off>  <-- format for function
+
+% turn the arduino LED on for 1 second and then back off
 % writeDigitalPin(a, 'D13', 1);
 % pause(1);
 % writeDigitalPin(a, 'D13', 0);
 
-% loop for turning LED on and off for 5 cycles
+% loop for turning LED on for 0.75s and off for 0.5s for 5 cycles
 for i = 1:5
     writeDigitalPin(a, 'D13', 1);
     pause(0.75);
