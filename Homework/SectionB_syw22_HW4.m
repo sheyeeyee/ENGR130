@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 4
 % Started 9/15/23
-% Finished 9//23
+% Submitted 9//23
 % Due 9/20/23
 
 %% Question 2
@@ -56,8 +56,8 @@ close all;
 
 % scores received from HW 4 file
 score = [59, 70, 88, 95, 92, 76, 94, 87, 82, 91, 88, 65, 86, 93, 88, 96, 92, 87, 30, 80];
-letterGrade = ["A", "B", "C", "D", "F"];
-numLetterGrade = [0, 0, 0, 0, 0];
+letterGrade = ["A", "B", "C", "D", "F"]; % vector to be used later for printing grade distribution
+numLetterGrade = [0, 0, 0, 0, 0]; % holds the number of students that earn each grade
 
 % print each student's score/grade and count the number of students that earn each grade (same loop for the sake of saving space and preventing repetitive code)
 for i = 1:length(score) % iterate through the number of scores/students (use length() so the for-loop can run for any number of students)
