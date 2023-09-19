@@ -89,12 +89,16 @@ clc;
 close all;
 
 vX = 200; % m/s
-y0 = 1000; % m
+x = 0;
+y = 1000; % m
 g = 9.81; % m/s
 t = 0:0.1:10;
 
-x = vX.*t;
-y = y0 - 0.5*g*t.^2;
+while (y < 185)
+    t = t + 0.1;
+    x = vX.*t;
+    y = y - 0.5*g*t.^2;
+end
 
 plot(x, y);
 xlabel("Horizontal Position (m)");
