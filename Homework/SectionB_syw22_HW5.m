@@ -63,5 +63,61 @@ while (h >= 0)
     h = v0*t - 0.5*g*t^2; % calculate new height
 end
 
+figure(1);
 plot(tVector, hVector);
+xlabel("Time (s)");
+ylabel("Height of Rocket (m)");
+title("Rocket Height Over Time");
+
+figure(2);
 plot(tVector, vVector);
+xlabel("Time (s)");
+ylabel("Velocity of Rocket (m)");
+title("Rocket Velocity Over Time");
+
+%% Question 3
+clear;
+clc;
+close all;
+
+% constants
+g = 9.8; % m/s^2
+y0 = 1000; % m
+tStep = 0.1; % s
+
+% variables
+vX = 200; % m/s
+x = 0;
+y = y0;
+t = 0;
+
+% vectors
+xVector = [];
+yVector = [];
+
+while (y >= 185)
+    % compiling x and y values into vectors for plot
+    xVector = [xVector, x];
+    yVector = [yVector, y];
+
+    % increase time
+    t = t + tStep;
+
+    % calculating x and y values over time
+    x = vX*t;
+    y = y0 - 0.5*g*t^2;
+end
+
+plot(xVector, yVector);
+xlabel("Horizontal Position of Package");
+ylabel("Vertical Position of Package");
+title("Position of Package of Humanitarian Aid Supplies After Dropped from Plane");
+legend("Package Position");
+
+randX = [];
+
+for i = 1:10
+    randIndex = randi(10);
+    randX = [randX, randX(randIndex)];
+end
+
