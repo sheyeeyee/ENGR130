@@ -34,6 +34,34 @@ ylabel('y (units unknown)');
 
 %% Question 2
 clear;
+clc;
+close all;
 
-v0 = 0; % m
-g = 9.81; % m/s
+% constants
+g = 9.8; % m/s^2
+v0 = 140; % m/s
+tStep = 0.075; % s
+
+% variables
+h = 0; % m
+v = v0;
+t = 0;
+
+% vectors
+tVector = [];
+vVector = [];
+hVector = [];
+
+while (h >= 0)
+    % the length of these vectors increases by 1 every iteration because the vector is re-equal to itself plus the following value generated from the loop
+    tVector = [tVector, t];
+    vVector = [vVector, v];
+    hVector = [hVector, h];
+
+    t = t + tStep; % update time
+    v = v0 - g*t; % calculate new velocity
+    h = v0*t - 0.5*g*t^2; % calculate new height
+end
+
+plot(tVector, hVector);
+plot(tVector, vVector);
