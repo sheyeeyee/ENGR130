@@ -63,13 +63,13 @@ while (h >= 0)
     h = v0*t - 0.5*g*t^2; % calculate new height
 end
 
-figure(1);
+figure(1); % create one figure
 plot(tVector, hVector);
 xlabel("Time (s)");
 ylabel("Height of Rocket (m)");
 title("Rocket Height Over Time");
 
-figure(2);
+figure(2); % create another figure
 plot(tVector, vVector);
 xlabel("Time (s)");
 ylabel("Velocity of Rocket (m)");
@@ -108,16 +108,39 @@ while (y >= 185)
     y = y0 - 0.5*g*t^2;
 end
 
-plot(xVector, yVector);
+hold on;
+plot(xVector, yVector, '--');
 xlabel("Horizontal Position of Package");
 ylabel("Vertical Position of Package");
 title("Position of Package of Humanitarian Aid Supplies After Dropped from Plane");
-legend("Package Position");
 
-randX = [];
+% randX = [];
+% y10 = [];
+x10 = [];
+y10 = [];
 
-for i = 1:10
-    randIndex = randi(10);
-    randX = [randX, randX(randIndex)];
+for i = 1:10:100
+    x10 = [x10, xVector(i)];
+    y10 = [y10, yVector(i)];
 end
+% tried to get random coordinates, but unnecessary
+% for i = 1:10
+%     randIndex = randi(129);
+%     randX = [randX, xVector(randIndex)];
+%     randY = [randY, yVector(randIndex)];
+% end
 
+plot(x10, y10, 'ro');
+
+linearCoeff = polyfit(x10, y10, 1); % find coefficients of best-fit line
+linearFitX = x10(1:10); % x values of random coords (indices of the x10 vector)
+linearFitY = polyval(linearCoeff, x10); % y values of random coords (depends on x values)
+plot(linearFitX, linearFitY, 'p-');
+
+quadCoeff = polyfit(x10, y10, 2); % find coefficients of best-fit quadratic
+quadFitX = x10(1:10); % the x10 vector needs to be sorted from smallest to largest
+quadFitY = polyval(quadCoeff, x10);
+plot(quadFitX, quadFitY);
+hold off;
+
+legend("Package Position", "10 Selected Points", "Linear Best Fit", "Quadratic Best Fit");
