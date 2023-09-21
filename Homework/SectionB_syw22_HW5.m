@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 5
 % Started 9/20/23
-% Submitted 9//23
+% Submitted 9/21/23
 % Due 9/26/23
 
 %% Question 1
@@ -52,7 +52,7 @@ tVector = [];
 vVector = [];
 hVector = [];
 
-while (h >= 0)
+while (h >= 0) % the loop stops once the rocket hits the ground at 0 meters
     % the length of these vectors increases by 1 every iteration because the vector is re-equal to itself plus the following value generated from the loop
     tVector = [tVector, t];
     vVector = [vVector, v];
@@ -69,7 +69,7 @@ xlabel("Time (s)");
 ylabel("Height of Rocket (m)");
 title("Rocket Height Over Time");
 
-figure(2); % create another figure
+figure(2); % create another figure so graphs can be displayed side-by-side
 plot(tVector, vVector);
 xlabel("Time (s)");
 ylabel("Velocity of Rocket (m)");
@@ -95,7 +95,7 @@ t = 0;
 xVector = [];
 yVector = [];
 
-while (y >= 185)
+while (y >= 185) % as long as the package is above 185 meters
     % compiling x and y values into vectors for plot
     xVector = [xVector, x];
     yVector = [yVector, y];
@@ -108,7 +108,7 @@ while (y >= 185)
     y = y0 - 0.5*g*t^2;
 end
 
-hold on;
+hold on; % display all plots on the same graph
 plot(xVector, yVector, '--');
 xlabel("Horizontal Position of Package");
 ylabel("Vertical Position of Package");
