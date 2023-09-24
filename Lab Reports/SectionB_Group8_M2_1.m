@@ -2,7 +2,7 @@
 % ENGR 130
 % Module 2 Lab
 % Started 9/19/23
-% Finished 9//23
+% Finished 9/21/23
 % Due 9/25/23
 
 %% LAB 1: READING TURBIDITY SIGNALS
@@ -39,7 +39,7 @@ clc;
 close all;
 
 a = arduino();
-readDigitalPin(a, 'D7');
+readDigitalPin(a, 'D7'); % checking if button is pressed or not (1 means pressed, 0 means not pressed)
 
 %% 2. Write a script to collect voltage data from the sensor
 clear;
@@ -57,6 +57,6 @@ for i = 1:100
 end
 
 % 3. Convert your voltage data to Nephelometric Turbidity Units
-ntu_vector = -260 .* voltage_vector.^2 + 1800 .* voltage_vector - 3000 % dummy equation to calculate turbidity in NTU
+ntu_vector = -260 .* voltage_vector.^2 + 1800 .* voltage_vector - 3000; % dummy equation to calculate turbidity in NTU
 mean_voltage = mean(voltage_vector); % calculate the mean of the voltage values
 mean_ntu = mean(ntu_vector); % calculate the mean of the turbidity values
