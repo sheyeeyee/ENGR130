@@ -7,7 +7,7 @@
 
 %% LAB 1: READING TURBIDITY SIGNALS
 %% 2. Connect your Arduino
-%% 3. LED circuit
+%% 3. LED circuit (Shelley)
 clear;
 clc;
 close all;
@@ -23,7 +23,7 @@ for i = 1:4
     pause(timePeriod); % turn the LED off for the amount of time the user wants
 end
 
-%% 4. Testing your turbidity sensor
+%% 4. Testing your turbidity sensor (Shelley)
 clear;
 clc;
 close all;
@@ -33,7 +33,7 @@ voltage_1 = readVoltage(a, 'A0'); % around 4.222 (highest)
 voltage_2 = readVoltage(a, 'A0'); % around 0.1222 (lowest)
 
 %% LAB 2: COLLECTING AND ANALYZING TURBIDITY DATA
-%% 1. Connected the Arduino button circuit
+%% 1. Connected the Arduino button circuit (Hannah)
 clear;
 clc;
 close all;
@@ -41,7 +41,7 @@ close all;
 a = arduino();
 readDigitalPin(a, 'D7'); % checking if button is pressed or not (1 means pressed, 0 means not pressed)
 
-%% 2. Write a script to collect voltage data from the sensor
+%% 2. Write a script to collect voltage data from the sensor (Jack)
 clear;
 clc;
 close all;
