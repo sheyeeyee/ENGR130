@@ -3,6 +3,7 @@
 % Lecture 4
 % 9/19/23
 
+%% CURVE FITTING BY REGRESSION
 %% Quiz Testing
 clear;
 clc;
