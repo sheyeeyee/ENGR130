@@ -49,12 +49,25 @@ values = [6 8 2 0 6 0 7];
 nonZero = values(values ~= 0); % vectorName(logical test)
 
 %% Practice 3
+clear;
+clc;
+close all;
+
 load("Homework\HW6_design_data.mat");
 col3threshold = DesignData(DesignData(:,3) < 1850);
 
 fprintf("There are %i values in column 3 below the threshold of 1850 PSI.\n", length(col3threshold));
 
-minThreshold = min(col3threshold);
-maxThreshold = max(col3threshold);
-fprintf("Minimum PSI in column 3 w/in threshold: %i\n", minThreshold);
-fprintf("Maximum PSI in column 3 w/in threshold: %i\n", maxThreshold);
+[minValues, minIndices] = min(DesignData);
+[maxValues, maxIndices] = max(DesignData);
+fprintf("\nMinimum PSIs:\n Column 1: %i\n   Index: %i\n", minValues(1), minIndices(1));
+fprintf(" Column 2: %i\n   Index: %i\n", minValues(2), minIndices(2));
+fprintf(" Column 3: %i\n   Index: %i\n", minValues(3), minIndices(3));
+fprintf(" Column 4: %i\n   Index: %i\n", minValues(4), minIndices(4));
+fprintf(" Column 5: %i\n   Index: %i\n", minValues(5), minIndices(5));
+
+fprintf("\nMaximum PSIs:\n Column 1: %i\n   Index: %i\n", maxValues(1), maxIndices(1));
+fprintf(" Column 2: %i\n   Index: %i\n", maxValues(2), maxIndices(2));
+fprintf(" Column 3: %i\n   Index: %i\n", maxValues(3), maxIndices(3));
+fprintf(" Column 4: %i\n   Index: %i\n", maxValues(4), maxIndices(4));
+fprintf(" Column 5: %i\n   Index: %i\n", maxValues(5), maxIndices(5));
