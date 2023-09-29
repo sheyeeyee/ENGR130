@@ -22,7 +22,7 @@ close all;
 
 a = arduino();
 
-voltages = [];
+voltages = zeros(40);
 
 for i = 1:40
     voltages(i) = readVoltage(a, 'A0');
@@ -49,5 +49,23 @@ hold off;
 title("Mean Voltages of Turbidity Sensor of Different NTU Values of Water");
 xlabel("NTU Values");
 ylabel("Mean Voltages");
+legend("Data Points", "Quadratic Fit");
 
-fprintf("NTU = %.2ev^2 + %.2ev + %.2f\n", p(1), p(2), p(3));
+fprintf("NTU = %.2Ev^2 + %.2Ev + %.2f\n", p(1), p(2), p(3)); % NTU = -1.13E-7v^2 + -6.55E-04V + 4.15
+
+%% LAB 4: FILTER CONSTRUCTION AND TESTING
+% re-run for each NTU
+clear;
+clc;
+close all;
+
+a = arduino();
+
+voltages = zeros(20);
+
+for i = 1:20
+    voltages(i) = readVoltage(a, 'A0');
+    pause(0.25);
+end
+
+meanVoltageTest = mean(voltages)
