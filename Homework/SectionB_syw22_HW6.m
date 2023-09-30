@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 6
 % Started 9/28/23
-% Submitted 9//23
+% Submitted 9/30/23
 % Due 10/4/23
 
 %% Question 1
@@ -32,7 +32,7 @@ Mean_Under_30 = mean(A(A < 30));
 Number_at_Max = length(A(A == max(A)));
 
 %in one line, create a new vector with all the even-valued elements in A
-B = A(mod(A, 2) == 0 & A ~= 0);
+B = A(mod(A, 2) == 0 & A ~= 0); % not sure why zero isn't even
 
 %% Question 2
 clear;
@@ -66,23 +66,20 @@ clear;
 clc;
 close all;
 
-load("HW6_PressureSensors.mat");
+load("HW6_PressureSensors.mat"); % load data from .mat file
 
-warnings = 0;
+warnings = 0; % set a warnings variable to be added to later for warning count
 
-% for-loop for counting warnings
-for i = 1:length(bulkhead)
-    if (bulkhead(i) < 60)
-        if (abs(cabin(i) - cabin(i-1)) > 10)
-            warnings = warnings + 1;
+% for-loop for counting warnings (could be done with logical indexing but couldn't figure it out)
+for i = 1:length(bulkhead) % iterate through every index of the bulkhead vector
+    if (bulkhead(i) < 60) % check for bulkhead values less than 60 MPa
+        if (abs(cabin(i) - cabin(i-1)) > 10) % check for delta cabin values greater than 10 MPa (since every measurement is taken 2 seconds apart and we need to know whether the cabin pressure drops by more than 5 MPa/s which is 10 MPa/2s)
+            warnings = warnings + 1; % increment warnings every time the conditions are met
         end
     end
 end
 
-% attempt at logical indexing
-% bulkheadWarnings = bulkhead(bulkhead < 60);
-% cabinWarnings = cabin(< 10); % how do you check if the difference between two consecutive values is less than 10?
-
+% give protocol instructions based on how many warnings were counted
 if (warnings == 0)
     fprintf("No action required.\n");
 elseif (warnings < 21)
@@ -90,3 +87,26 @@ elseif (warnings < 21)
 else
     fprintf("There are %i warnings. Follow the PROBABLE RISK protocol!\n", warnings);
 end
+
+%% Testing (logical indexing attempt did not work)
+% clear;
+% clc;
+% close all;
+% 
+% load("HW6_PressureSensors.mat");
+% % deltaTime = diff(cabin)
+% 
+% [bulkhead60, bulkheadsIndices] = bulkhead(bulkhead < 60); % how do I get the indices of the bulkhead values greater than 60?
+% [cabinDelta10, cabinIndices] = cabin(diff(cabin));
+% 
+% if (bulkheadIndices == cabinIndices)
+%     warnings = warnings + 1;
+% end
+% 
+% if (warnings == 0)
+%     fprintf("No action required.\n");
+% elseif (warnings < 21)
+%     fprintf("There are %i warnings. Follow the POTENTIAL RISK protocol!\n", warnings);
+% else
+%     fprintf("There are %i warnings. Follow the PROBABLE RISK protocol!\n", warnings);
+% end
