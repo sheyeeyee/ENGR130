@@ -61,19 +61,21 @@ for i = 1:5
     fprintf("\nSimulation %i:\nMaximum value: %i PSI at %.1f s.\nMinimum value: %i PSI at %.1f s.\n", i, maxValues(i), maxTime(i), minValues(i), minTime(i));
 end
 
-%% Question 3
+%% Question 3: For-Loop Attempt (logical indexing attempt below)
 clear;
 clc;
 close all;
 
 load("HW6_PressureSensors.mat"); % load data from .mat file
 
+bulkheadThreshold = 60; % MPa
+cabinThreshold = 5; % MPa/s
 warnings = 0; % set a warnings variable to be added to later for warning count
 
 % for-loop for counting warnings (could be done with logical indexing but couldn't figure it out)
 for i = 1:length(bulkhead) % iterate through every index of the bulkhead vector
-    if (bulkhead(i) < 60) % check for bulkhead values less than 60 MPa
-        if (abs(cabin(i) - cabin(i-1)) > 10) % check for delta cabin values greater than 10 MPa (since every measurement is taken 2 seconds apart and we need to know whether the cabin pressure drops by more than 5 MPa/s which is 10 MPa/2s)
+    if (bulkhead(i) < bulkheadThreshold) % check for bulkhead values less than 60 MPa
+        if (abs(cabin(i) - cabin(i-1)) > cabinThreshold*2) % check for delta cabin values greater than 10 MPa (since every measurement is taken 2 seconds apart and we need to know whether the cabin pressure drops by more than 5 MPa/s which is 10 MPa/2s)
             warnings = warnings + 1; % increment warnings every time the conditions are met
         end
     end
@@ -88,25 +90,27 @@ else
     fprintf("There are %i warnings. Follow the PROBABLE RISK protocol!\n", warnings);
 end
 
-%% Testing (logical indexing attempt did not work)
-% clear;
-% clc;
-% close all;
-% 
-% load("HW6_PressureSensors.mat");
-% % deltaTime = diff(cabin)
-% 
-% [bulkhead60, bulkheadsIndices] = bulkhead(bulkhead < 60); % how do I get the indices of the bulkhead values greater than 60?
-% [cabinDelta10, cabinIndices] = cabin(diff(cabin));
-% 
-% if (bulkheadIndices == cabinIndices)
-%     warnings = warnings + 1;
-% end
-% 
-% if (warnings == 0)
-%     fprintf("No action required.\n");
-% elseif (warnings < 21)
-%     fprintf("There are %i warnings. Follow the POTENTIAL RISK protocol!\n", warnings);
-% else
-%     fprintf("There are %i warnings. Follow the PROBABLE RISK protocol!\n", warnings);
-% end
+%% Question 3: Logical Indexing Attempt (happened after the for-loop attempt)
+clear;
+clc;
+close all;
+
+load("HW6_PressureSensors.mat");
+
+bulkheadThreshold = 60; % MPa
+cabinThreshold = 5; % MPa/s
+
+cabinPressureRate = diff(cabin); % calculate the rate of MPa change every 2 seconds since measurements are taken every 2 seconds
+cabinPressureRate = [0, cabinPressureRate]; % add a 0 to the beginning of the rate vector to shift the vector to the right so that the rate of the previous 2 seconds is compared to the current bulkhead pressure
+cabinPressureRate(end) = []; % remove the last element of the rate vector so it's the same length as the bulkhead vector
+
+warningIndices = bulkhead < bulkheadThreshold & abs(cabinPressureRate) > cabinThreshold*2; % returns 0s and 1s for every index depending on whether it's true or not
+warnings = sum(warningIndices); % adding all of the warningIndices values together (will only add 1s since every other number will be 0)
+
+if (warnings == 0)
+    fprintf("No action required.\n");
+elseif (warnings < 21)
+    fprintf("There are %i warnings. Follow the POTENTIAL RISK protocol!\n", warnings);
+else
+    fprintf("There are %i warnings. Follow the PROBABLE RISK protocol!\n", warnings);
+end
