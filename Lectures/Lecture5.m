@@ -1,7 +1,7 @@
 % Shelley Wei
 % ENGR 130
 % Lecture 4
-% 9/19/23
+% 9/26/23
 
 %% LOGICAL INDEXING
 %% Practice 1

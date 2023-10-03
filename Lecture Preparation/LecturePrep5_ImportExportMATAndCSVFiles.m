@@ -30,7 +30,7 @@ clear;
 clc;
 close all;
 
-save('new_file.mat'); % saves .MAT file (workspace)
+save('new_file.mat'); % saves (exports) .MAT file (workspace)
 
 save('new_file.mat', 'var1', 'var2'); % saves specific workspace variables
 
