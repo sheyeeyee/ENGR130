@@ -44,6 +44,8 @@ load("Homework\HW6_design_data.mat"); % load data from .mat file
 minPressure = input("Enter the threshold value: "); % ask user for a minimum pressure
 simNumber = input("Enter the simulation number (1-5): "); % ask user for which sim they want to see data below the threshold from
 t = 0.1:0.1:10; % time starting from 1 second, going to 10 (100 time values)
+
+% extracting individual simulations for graphing later
 sim1 = DesignData(:, 1);
 sim2 = DesignData(:, 2);
 sim3 = DesignData(:, 3);
@@ -67,6 +69,7 @@ for i = 1:5
     fprintf("\nSimulation %i:\nMaximum value: %i PSI at %.1f s.\nMinimum value: %i PSI at %.1f s.\n", i, maxValues(i), maxTime(i), minValues(i), minTime(i));
 end
 
+% plot pressure values from simulations against time on the same plot
 plot(t, sim1, t, sim2, t, sim3, t, sim4, t, sim5);
 title("Pressure Values for Each Simulation");
 xlabel("Time (s)");

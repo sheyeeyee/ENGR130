@@ -22,4 +22,5 @@ for i = 1:30
     pause(0.5)
 end
 
-%% LAB 2: 
+%% LAB 2: PIEZOELECTRIC FILM
+%% 2. Process CSV data
