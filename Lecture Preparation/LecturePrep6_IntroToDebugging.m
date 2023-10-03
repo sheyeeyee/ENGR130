@@ -1,6 +1,6 @@
 % Shelley Wei
 % ENGR 130
-% Lecture Preparation 4
+% Lecture Preparation 6
 % Started 9/30/23
 % Finished 9/30/23
 % Due 10/2/23
