@@ -24,3 +24,28 @@ end
 
 %% LAB 2: PIEZOELECTRIC FILM
 %% 2. Process CSV data
+clear;
+clc;
+close all;
+
+piezoKnock = readmatrix('SectionB_Group10_M3_1.csv'); % importing data from oscilloscope
+
+piezoKnock = piezoKnock(4:1667, :); % removing NaN values from original data
+
+% important values (different voltage values, which are in column 2 of the data)
+[piezoKnockMin, minIdx] = min(piezoKnock(:, 2)); % finding the minimum voltage and the index of it to plot later
+[piezoKnockMax, maxIdx] = max(piezoKnock(:, 2)); % finding the maximum voltage and the index of it to plot later
+piezoKnockMean = mean(piezoKnock(:, 2)); % finding the mean voltage to plot later
+
+hold on;
+plot(piezoKnock(:, 1), piezoKnock(:, 2), "k"); % actual data
+plot(piezoKnock(maxIdx), piezoKnockMax, "bo"); % max point
+plot(piezoKnock(minIdx), piezoKnockMin, "rsquare"); % min point
+yline(piezoKnockMean, "--magenta"); % mean
+hold off;
+
+% labels
+legend("Voltages from Knocks", "Maxmimum Voltage", "Maximum Voltage", "Mean Voltage");
+xlabel("Time (s)");
+ylabel("Voltage");
+title("Piezoelectric Voltage Data from Knocks")
