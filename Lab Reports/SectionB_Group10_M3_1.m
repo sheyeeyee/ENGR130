@@ -2,7 +2,7 @@
 % ENGR 130
 % Module 2 Lab
 % Started 10/3/23
-% Finished 10//23
+% Finished 10/5/23
 % Due 10/9/23
 
 %% LAB 1: MEASURING SIGNALS WITH THE OSCILLOSCOPE
@@ -11,10 +11,11 @@ clear;
 clc;
 close all;
 
-% Set up Arduino
+% 3b
+% set up Arduino
 A = arduino();
 
-% Turn the light on & off at a frequency of 1 Hz over a period of 30 seconds.
+% turn the light on & off at a frequency of 1 Hz over a period of 30 seconds
 for i = 1:30
     writeDigitalPin(A, "D8", 1);
     pause(0.5);
@@ -28,6 +29,7 @@ clear;
 clc;
 close all;
 
+% 2a
 piezoKnock = readmatrix('SectionB_Group10_M3_1.csv'); % importing data from oscilloscope
 
 piezoKnock = piezoKnock(4:1667, :); % removing NaN values from original data
@@ -37,6 +39,7 @@ piezoKnock = piezoKnock(4:1667, :); % removing NaN values from original data
 [piezoKnockMax, maxIdx] = max(piezoKnock(:, 2)); % finding the maximum voltage and the index of it to plot later
 piezoKnockMean = mean(piezoKnock(:, 2)); % finding the mean voltage to plot later
 
+% 2b
 hold on;
 plot(piezoKnock(:, 1), piezoKnock(:, 2), "k"); % actual data
 plot(piezoKnock(maxIdx), piezoKnockMax, "bo"); % max point
