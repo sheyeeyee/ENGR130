@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 6
 % Started 10/4/23
-% Submitted 10//23
+% Submitted 10/5/23
 % Due 10/11/23
 
 %% Question 1
@@ -10,10 +10,10 @@ clear;
 clc;
 close all;
 
-%initial conditions and constants
+% initial conditions and constants
 v_x = 200; % horizontal velocity
-y_o = 1000; %initial height
-y_f = 185;  %final height %*** previously y_f = 0, but the prompt asks to analyze the path up until the package reaches 185m, not 0m
+y_o = 1000; % initial height
+y_f = 185;  % final height %*** previously y_f = 0, but the prompt asks to analyze the path up until the package reaches 185m, not 0m
 g = 9.8;
 
 % putting initial values into vectors and loop
@@ -24,7 +24,7 @@ y(1) = y_o;
 
 % calculate x and y coordinates as payload drops
 % until parachute is deployed
-while (y(idx) >= y_f) %*** previously y(idx) ~= y_f but why is that wrong? shouldn't the loop stop once y(idx) = 185??
+while (y(idx) >= y_f) %*** previously y(idx) ~= y_f but the y value never equals 185m, it skips over it since the y values are calculated at intervals
     idx = idx+1;
     t = t + .1;
     x(idx) = v_x*t;
@@ -40,13 +40,22 @@ else
     fprintf('The chute will deploy in Zone 1 at a distance of %.2f meters.\n', x(idx)); %*** not a functional error but didn't state the x distance and also need to change to fprintf to do so
 end
 
+%% Question 2 Prep
+clear;
+clc;
+close all;
+
+watts = 1:20;
+save('Homework\watts.mat', 'watts');
+
 %% Question 2
 clear;
 clc;
 close all;
 
 % Read in power data
-P = read('watts.mat'); %*** ?
+load('watts.mat'); %*** previously read(), but the function to load a file with data is load(), also you can't set a variable equal to a file since load is for loading a file
+P = watts; %*** set P equal to the vector in the file
 
 % Calculate average and standard deviation.
 avg = sum(P)/length(P);
@@ -56,9 +65,9 @@ stdev = sqrt(sum((P-avg).^2)/length(P)); %*** square root function is sqrt, not 
 powMin = avg - stdev;
 
 % Print values to screen
-fprintf('\nAverage: %.2f watts', avg); %*** avg is not a string variable, it's a number (probably float)
+fprintf('Average: %.2f watts', avg); %*** avg is not a string variable, it's a number (probably float)
 fprintf('\nStandard Deviation: %.2f watts', stdev);
-fprintf('\nMinimum Power Requirement: %.2f watts', powMin); %*** forgot to include comma to separate between printed string and format specifier variable
+fprintf('\nMinimum Power Requirement: %.2f watts\n', powMin); %*** forgot to include comma to separate between printed string and format specifier variable
 
 % Create wind speed vector
 wind = [5:1:13];
@@ -75,10 +84,10 @@ Pow2 = (1/6)*rho*A2.*(wind.^3);
 Pow3 = (1/6)*rho*A3.*(wind.^3);
 
 % Plot power vs. speed
-plot(Pow1,wind,'r',Pow2,wind,'b-*',Pow3,wind,'g--');
+plot(wind, Pow1, 'r', wind, Pow2, 'b-*', wind, Pow3, 'g--'); %*** previously graph's x and y were switched
 
 % Label plot
 title('Power Generation for Three Wind Turbines');
 xlabel('Wind Speed (m/s)');
 ylabel('Power (watts)');
-legend("A = 10 m^2","A = 70 m^2", "A = 150 m^2"); %*** forgot to include quotes around labels for legend
+legend("A = 10 m^2", "A = 70 m^2", "A = 150 m^2"); %*** forgot to include quotes around labels for legend
