@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 6
 % Started 10/4/23
-% Submitted 10/5/23
+% Submitted 10/6/23
 % Due 10/11/23
 
 %% Question 1
