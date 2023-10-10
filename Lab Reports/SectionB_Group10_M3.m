@@ -51,4 +51,7 @@ hold off;
 legend("Voltages from Knocks", "Maxmimum Voltage", "Maximum Voltage", "Mean Voltage");
 xlabel("Time (s)");
 ylabel("Voltage");
-title("Piezoelectric Voltage Data from Knocks")
+title("Piezoelectric Voltage Data from Knocks");
+
+%% LAB 3: DETECTING KNOCKS
+%%

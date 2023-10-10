@@ -3,7 +3,7 @@
 % SI Session Week 6
 % 10/8/23
 
-%% Summary Problems
+%% Debugging
 %% 1
 clear;
 clc;
