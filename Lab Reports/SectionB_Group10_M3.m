@@ -160,12 +160,15 @@ for i = 1:(senseTime*4)
         elseif (voltages(i) <= thresh) & (firstKnock == 0) % checking for when voltage goes back down below the threshold so we know that the knock has ended and the next one can be counted
             firstKnock = 1;
             
+            % G will play once the piezoelectric film is unpressed (this was a slightly unintended feature, but it works well as it basically signals how long the film is being pressed for)
             playTone(a, buzzPin, gNote, 1); % play G
             pause(0.1);
             playTone(a, buzzPin, gNote, 0); % play G
             pause(0.1);
         end
     end
+    
+    % code for RGB LED doesn't work as expected (the LED sometimes emits a blend of colors instead of the separate ones)
     if (lightOrBuzz == 2)
         if (voltages(i) >= thresh) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
             countKnock = countKnock + 1;
@@ -193,4 +196,4 @@ for i = 1:(senseTime*4)
     pause(0.25);
 end
 
-fprintf("The number of knocks recorded is %i.\n", countKnock);
+fprintf("The number of knocks recorded is %i.\n", countKnock); % sanity check
