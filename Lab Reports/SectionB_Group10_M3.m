@@ -85,17 +85,21 @@ plot(timeList(voltages >= thresh), voltages(voltages >= thresh), "ro");
 yline(thresh, "--");
 
 %% 3e.
+clear;
+clc;
+close all;
+
 a = arduino();
-voltages = [];
-timeList = 1:40;
+voltages = []; % voltage vector to keep track of voltages throughout trial runs
+timeList = 1:40; % amount of times for-loop will run later, which translates into seconds
 
-thresh = 0.06;
+thresh = 0.06; % voltage threshold for knock
 
-countKnock = 0;
-firstKnock = 1;
+countKnock = 0; % knock counter
+firstKnock = 1; % knock counter condition
 
 for index = timeList
-    voltages(index) = readVoltage(a, 'A1');
+    voltages(index) = readVoltage(a, 'A5');
     if (voltages(index) >= thresh) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
         countKnock = countKnock + 1;
         firstKnock = 0; % set this to 0 to indicate that the voltage passed the threshold for the first time during a knock
@@ -105,4 +109,88 @@ for index = timeList
     disp(voltages(index)); % sanity check
     pause(0.25);
 end
+fprintf("The number of knocks recorded is %i.\n", countKnock);
+
+%% Final Code
+clear;
+clc;
+close all;
+
+a = arduino();
+
+% pins
+piezoPin = 'A5';
+buzzPin = 'D6';
+redPin = 'D9';
+bluePin = 'D11';
+greenPin = 'D10';
+
+% note frequencies
+cNote = 1046.50;
+ebNote = 1244.51;
+gNote = 1567.98;
+
+thresh = 0.06;
+
+countKnock = 0;
+firstKnock = 1;
+
+voltages = [];
+
+% user interaction
+lightOrBuzz = input("Please indicate whether you'd like to use the light feature or buzz feature by inputting the respective number: \n  1) Buzz\n  2) Light\n");
+senseTime = input("\nPlease input how many seconds you'd like the knock sensor to be active for: \n");
+
+for i = 1:(senseTime*4)
+    voltages(i) = readVoltage(a, piezoPin);
+    if (lightOrBuzz == 1)
+        if (voltages(i) >= thresh) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
+            countKnock = countKnock + 1;
+            firstKnock = 0; % set this to 0 to indicate that the voltage passed the threshold for the first time during a knock
+            
+            playTone(a, buzzPin, cNote, 1); % play C
+            pause(0.1);
+            playTone(a, buzzPin, cNote, 0); % play C
+            pause(0.1);
+        elseif (voltages(i) < thresh && voltages(i) >= 0.02) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
+            playTone(a, buzzPin, ebNote, 1); % play E flat
+            pause(.1);
+            playTone(a, buzzPin, ebNote, 0); % play E flat
+            pause(0.1);
+        elseif (voltages(i) <= thresh) & (firstKnock == 0) % checking for when voltage goes back down below the threshold so we know that the knock has ended and the next one can be counted
+            firstKnock = 1;
+            
+            playTone(a, buzzPin, gNote, 1); % play G
+            pause(0.1);
+            playTone(a, buzzPin, gNote, 0); % play G
+            pause(0.1);
+        end
+    end
+    if (lightOrBuzz == 2)
+        if (voltages(i) >= thresh) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
+            countKnock = countKnock + 1;
+            firstKnock = 0; % set this to 0 to indicate that the voltage passed the threshold for the first time during a knock
+            
+            writeDigitalPin(a, redPin, 1); % emit red
+            pause(0.1);
+            writeDigitalPin(a, redPin, 0); % turn off red
+            pause(0.1);
+        elseif (voltages(i) < thresh && voltages(i) >= 0.02) & (firstKnock == 1) % checking for the first time the voltage goes beyond threshold since each knock is an up-down peak
+            writeDigitalPin(a, bluePin, 1); % emit blue
+            pause(0.1);
+            writeDigitalPin(a, bluePin, 0); % turn off blue
+            pause(0.1);
+        elseif (voltages(i) <= thresh) & (firstKnock == 0) % checking for when voltage goes back down below the threshold so we know that the knock has ended and the next one can be counted
+            firstKnock = 1;
+            
+            writeDigitalPin(a, greenPin, 1); % emit green
+            pause(0.1);
+            writeDigitalPin(a, greenPin, 0); % turn off green
+            pause(0.1);
+        end
+    end
+    disp(voltages(i)); % sanity check
+    pause(0.25);
+end
+
 fprintf("The number of knocks recorded is %i.\n", countKnock);

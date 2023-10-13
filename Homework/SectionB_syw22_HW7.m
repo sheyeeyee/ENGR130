@@ -62,7 +62,7 @@ avg = sum(P)/length(P);
 stdev = sqrt(sum((P-avg).^2)/length(P)); %*** square root function is sqrt, not sqrrt
 
 % Determine minimum power needed
-powMin = avg - stdev;
+powMin = avg + stdev; %*** previously subtracted one stdev but min power is supposed to be at least one stdev above the avg
 
 % Print values to screen
 fprintf('Average: %.2f watts', avg); %*** avg is not a string variable, it's a number (probably float)
