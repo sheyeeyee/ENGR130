@@ -56,11 +56,12 @@ xlabel("Standard Deviation");
 ylabel("Number of Stride Lengths per Standard Deviation");
 
 % Part 3
-strideTime = stride_length./cadence; % calculate the time length of the avg stride
-diff = abs(strideTime - stance - swing);
+strideTime = cadence./120; % calculate the time length of the avg stride ?????????????????
+stanceSwing = stance + swing;
+diff = abs(strideTime - stanceSwing);
 
-discrepant = diff(diff > 0.1); % find how many patients have discrepant data
-disIdx = find(diff > 0.1); % find the indices of the patients with discrepant data (finding where the condition doesn't return 0)
+discrepant = diff(diff > 0.01); % find how many patients have discrepant data
+disIdx = find(diff > 0.01); % find the indices of the patients with discrepant data (finding where the condition doesn't return 0)
 disPatient = patient(disIdx);
 
 % forgot how to find elements at certain indices so just used for-loop, figured out how to use logical indexing later
