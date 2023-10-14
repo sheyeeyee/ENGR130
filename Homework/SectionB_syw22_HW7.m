@@ -1,6 +1,6 @@
 % Shelley Wei
 % ENGR 130
-% Homework 6
+% Homework 7
 % Started 10/4/23
 % Submitted 10/6/23
 % Due 10/11/23
