@@ -12,27 +12,44 @@ clc;
 close all;
 
 m = 1; % kg
-y = 1; % m
+y = [1]; % m
 vel = 0; % m/s
-dt = 0.0001; % s
-t = 1:0.0001:10;
+dt = 0.0001; % s (time increment)
+t = 10; % s (total time for ball to fall/bounce)
 c = 0; % N*s/m
 k = 0; % N/m
 g = 9.81; % m/s^2
-acc = (-m*g - k*y - c * vel) / m;
 
-for i = t
-    if (y > 0)
-        y = y + vel*dt;
-        vel = vel + acc*dt;
-    else
-        c = 2;
-        k = 5000;
-        y = y + vel*dt;
-        vel = vel + acc*dt;
+for i = 1:t/dt
+    if (y(t) > 0)
+        a = accel(m, g, k, y(t), c, vel);
+        y = [y, y + vel*dt];
+        vel = vel + a*dt;
+    else % ball hits ground
+        a = accel(m, g, 5000, y(t), 2, vel);
+        y = [y, y + vel*dt];
+        vel = vel + a*dt;
     end
 end
 
+% 1c.
 plot(t, y);
+title("Ball Motion Over Time");
+xlabel("Time (s)");
+ylabel("Ball Height (m)");
+
+% 1d.
+min_height = min(y);
+
+function acceleration = accel(m, g, k, y, c, vel)
+    % Calculates acceleration of ball
+    % Call format: accel(m, g, k, y, c, vel)
+    % Input
+    %   m: mass in kg
+    %   g: gravity in m/s^2
+    %   k: force constant of spring
+
+    acceleration = (-m*g - k*y - c * vel) / m;
+end
 
 %% 2. Try different c and k values

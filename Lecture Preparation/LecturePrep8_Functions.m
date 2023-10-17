@@ -35,11 +35,11 @@ fprintf("The value of %i squared is %i.\n", n, nSquared);
 
 % function definitions must be at the end of a script so function calls must be before the function definition
 function squareVal = squareIt(num) % squareVal's and num's scope is in the function
-% This function calculates the square of a number
-% Format of call: square(num)
-% Input
-%     num: number to be squared
-% Output
-%     squareVal: square of the number
-squareVal = num * num;
+    % This function calculates the square of a number
+    % Format of call: square(num)
+    % Input
+    %     num: number to be squared
+    % Output
+    %     squareVal: square of the number
+    squareVal = num * num;
 end
