@@ -21,14 +21,14 @@ c = 0; % N*s/m
 g = 9.81; % m/s^2
 
 for i = 1:t/dt
-    if (y(t) > 0) % it keeps throwing an error saying that the index can't exceed 1, which I kind of get why but I also don't
-        a = accel(m, g, k, y(t), c, vel);
-        y = [y, y + vel*dt];
+    if (y(i) > 0)
+        a = accel(m, g, k, y(i), c, vel);
         vel = vel + a*dt;
+        y = [y, y + vel*dt]; % apparently there are too many y values, something's wrong with the calculations
     else % ball hits ground
-        a = accel(m, g, 5000, y(t), 2, vel);
-        y = [y, y + vel*dt];
+        a = accel(m, g, 5000, y(i), 2, vel);
         vel = vel + a*dt;
+        y = [y, y + vel*dt];
     end
 end
 
