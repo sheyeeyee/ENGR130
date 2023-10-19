@@ -12,29 +12,30 @@ clc;
 close all;
 
 m = 1; % kg
-y = [1]; % m
+y = 1; % m
 vel = 0; % m/s
 dt = 0.0001; % s (time increment)
 t = 10; % s (total time for ball to fall/bounce)
+tVector = 0:0.0001:10-0.0001;
 k = 0; % N/m
 c = 0; % N*s/m
 g = 9.81; % m/s^2
 
-for i = 1:t/dt
-    if (y(i) > 0)
-        a = accel(m, g, k, y(i), c, vel);
-        vel = vel + a*dt;
-        y = [y, y + vel*dt]; % apparently there are too many y values, something's wrong with the calculations
-    else % ball hits ground
-        a = accel(m, g, 5000, y(i), 2, vel);
-        vel = vel + a*dt;
-        y = [y, y + vel*dt];
+for i = 2:t/dt
+    if (y(i-1) > 0) % check if height at current time is greater than 0
+        a = accel(m, g, k, y(i-1), c, vel); % calculate acceleration at current height
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    else % check if ball is hitting ground (when the height is less than or equal to 0)
+        a = accel(m, g, 5000, y(i-1), 2, vel); % calculate acceleration while the ball hits the ground (while height <= 0)
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
     end
 end
 
 % 1c.
-plot(t, y);
-title("Ball Motion Over Time");
+plot(tVector, y);
+title("Ball Motion Over Time (Dampened)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
@@ -42,44 +43,141 @@ ylabel("Ball Height (m)");
 min_height = min(y);
 
 % 1g.
-comet(t, y, 0.01);
+comet(tVector, y, 0.01);
+
+%% 1e.
+% 1b.
+clear;
+clc;
+close all;
+
+m = 1; % kg
+y = 1; % m
+vel = 0; % m/s
+dt = 0.0001; % s (time increment)
+t = 10; % s (total time for ball to fall/bounce)
+tVector = 0:0.0001:10-0.0001;
+k = 0; % N/m
+c = 0; % N*s/m
+g = 9.81; % m/s^2
+
+for i = 2:t/dt
+    if (y(i-1) > 0) % check if height at current time is greater than 0
+        a = accel(m, g, k, y(i-1), c, vel); % calculate acceleration at current height
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    else % check if ball is hitting ground (when the height is less than or equal to 0)
+        a = accel(m, g, 5000, y(i-1), c, vel); % calculate acceleration while the ball hits the ground (while height <= 0)
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    end
+end
+
+% 1f.
+plot(tVector, y);
+title("Ball Motion Over Time (Undampened)");
+xlabel("Time (s)");
+ylabel("Ball Height (m)");
+
+% 1g.
+comet(tVector, y, 0.01);
 
 %% 2. Try different c and k values
 %% 1st set of k and c values
+clear;
+clc;
+close all;
+
 m = 1; % kg
-y = [1]; % m
+y = 1; % m
 vel = 0; % m/s
 dt = 0.0001; % s (time increment)
 t = 10; % s (total time for ball to fall/bounce)
-k = 8000; % N/m
-c = 2; % N*s/m
+tVector = 0:0.0001:10-0.0001;
+k = 0; % N/m
+c = 0; % N*s/m
 g = 9.81; % m/s^2
 
+for i = 2:t/dt
+    if (y(i-1) > 0) % check if height at current time is greater than 0
+        a = accel(m, g, k, y(i-1), c, vel); % calculate acceleration at current height
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    else % check if ball is hitting ground (when the height is less than or equal to 0)
+        a = accel(m, g, 8000, y(i-1), 2, vel); % calculate acceleration while the ball hits the ground (while height <= 0)
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    end
+end
 
+plot(tVector, y);
+title("Ball Motion Over Time (Dampened)");
+xlabel("Time (s)");
+ylabel("Ball Height (m)");
 
 %% 2nd set of k and c values
+clear;
+clc;
+close all;
+
 m = 1; % kg
-y = [1]; % m
+y = 1; % m
 vel = 0; % m/s
 dt = 0.0001; % s (time increment)
 t = 10; % s (total time for ball to fall/bounce)
-k = 5000; % N/m
-c = 4; % N*s/m
+tVector = 0:0.0001:10-0.0001;
+k = 0; % N/m
+c = 0; % N*s/m
 g = 9.81; % m/s^2
 
+for i = 2:t/dt
+    if (y(i-1) > 0) % check if height at current time is greater than 0
+        a = accel(m, g, k, y(i-1), c, vel); % calculate acceleration at current height
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    else % check if ball is hitting ground (when the height is less than or equal to 0)
+        a = accel(m, g, 5000, y(i-1), 4, vel); % calculate acceleration while the ball hits the ground (while height <= 0)
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    end
+end
 
+plot(tVector, y);
+title("Ball Motion Over Time (Dampened)");
+xlabel("Time (s)");
+ylabel("Ball Height (m)");
 
 %% 3rd set of k and c values
+clear;
+clc;
+close all;
+
 m = 1; % kg
-y = [1]; % m
+y = 1; % m
 vel = 0; % m/s
 dt = 0.0001; % s (time increment)
 t = 10; % s (total time for ball to fall/bounce)
-k = 5000; % N/m
-c = 10; % N*s/m
+tVector = 0:0.0001:10-0.0001;
+k = 0; % N/m
+c = 0; % N*s/m
 g = 9.81; % m/s^2
 
+for i = 2:t/dt
+    if (y(i-1) > 0) % check if height at current time is greater than 0
+        a = accel(m, g, k, y(i-1), c, vel); % calculate acceleration at current height
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    else % check if ball is hitting ground (when the height is less than or equal to 0)
+        a = accel(m, g, 5000, y(i-1), 10, vel); % calculate acceleration while the ball hits the ground (while height <= 0)
+        y(i) = y(i-1) + vel*dt; % calculate current height and add to height vector
+        vel = vel + a*dt; % calculate velocity at current height
+    end
+end
 
+plot(tVector, y);
+title("Ball Motion Over Time (Dampened)");
+xlabel("Time (s)");
+ylabel("Ball Height (m)");
 
 %% Function Definitions
 function acceleration = accel(m, g, k, y, c, vel)
@@ -90,5 +188,5 @@ function acceleration = accel(m, g, k, y, c, vel)
     %   g: gravity in m/s^2
     %   k: force constant of spring
 
-    acceleration = (-m*g - k*y - c * vel) / m;
+    acceleration = (-m*g - k*y - c*vel) / m;
 end
