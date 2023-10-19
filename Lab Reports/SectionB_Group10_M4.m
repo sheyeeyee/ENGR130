@@ -34,16 +34,17 @@ for i = 2:t/dt
 end
 
 % 1c.
+% plot y vs. t
 plot(tVector, y);
 title("Ball Motion Over Time (Dampened)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
 % 1d.
-min_height = min(y);
+min_height = min(y); % find the minimum height of the ball
 
 % 1g.
-comet(tVector, y, 0.01);
+comet(tVector, y, 0.01); % plot the animated y vs. t plot
 
 %% 1e.
 % 1b.
@@ -74,13 +75,14 @@ for i = 2:t/dt
 end
 
 % 1f.
+% plot y vs. t with c value being 0 so the ball is undamped
 plot(tVector, y);
-title("Ball Motion Over Time (Undampened)");
+title("Ball Motion Over Time (Undamped)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
 % 1g.
-comet(tVector, y, 0.01);
+comet(tVector, y, 0.01); % plot the animated y vs. t plot
 
 %% 2. Try different c and k values
 %% 1st set of k and c values
@@ -110,8 +112,10 @@ for i = 2:t/dt
     end
 end
 
+
+% plot y vs. t with new k and c values
 plot(tVector, y);
-title("Ball Motion Over Time (Dampened)");
+title("Ball Motion Over Time (Damped)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
@@ -142,8 +146,9 @@ for i = 2:t/dt
     end
 end
 
+% plot y vs. t with new k and c values
 plot(tVector, y);
-title("Ball Motion Over Time (Dampened)");
+title("Ball Motion Over Time (Damped)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
@@ -174,8 +179,9 @@ for i = 2:t/dt
     end
 end
 
+% plot y vs. t with new k and c values
 plot(tVector, y);
-title("Ball Motion Over Time (Dampened)");
+title("Ball Motion Over Time (Damped)");
 xlabel("Time (s)");
 ylabel("Ball Height (m)");
 
@@ -187,6 +193,8 @@ function acceleration = accel(m, g, k, y, c, vel)
     %   m: mass in kg
     %   g: gravity in m/s^2
     %   k: force constant of spring
+    % Output
+    %   acceleration calculated with formula
 
-    acceleration = (-m*g - k*y - c*vel) / m;
+    acceleration = (-m*g - k*y - c*vel) / m; % calculate acceleration using given formula
 end
