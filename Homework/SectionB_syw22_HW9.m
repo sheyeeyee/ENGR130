@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 8
 % Started 10/19/23
-% Submitted 10//23
+% Submitted 10/19/23
 % Due 11/1/23
 
 %% Question 2
@@ -22,7 +22,7 @@ clear;
 clc;
 close all;
 
-x = 6;
+x = 6; % testing
 
 my_fact(x);
 
