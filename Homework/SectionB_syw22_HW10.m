@@ -8,10 +8,14 @@
 %% Question 1
 clear; clc; close all;
 
+vec = [1 2 3 4 1];
+[a, b] = mode_analysis(vec);
 
 %% Question 2
 clear; clc; close all;
 
+numTerms = input("Please input a positive integer value for the number of terms in the Fibonacci sequence:\n");
+fibonacci_gen_info(numTerms);
 
 %% Question 3
 clear; clc; close all;
@@ -24,23 +28,52 @@ fprintf("");
 
 %% Functions
 % 1
-
+function [values, indexes] = mode_analysis(vec)
+    % Finds the mode of the vector and the indices of the vector where the values equal the mode
+    % Call format: mode_analysis(vector);
+    % Inputs
+    %   vector: the set of numbers that the mode will be extracted from
+    % Outputs
+    %   m: the mode value of the vector
+    %   indices: the indices of the vector where the values equal the mode
+    
+    values = mode(vec);
+    indexes = [];
+    j = 1;
+    
+    for i = 1:length(vec)
+        if (vec(i) == values)
+            indexes(j) = i;
+            j = j + 1;
+        end
+    end
+end
 
 % 2
 function fibonacci_gen_info(value)
 end
 
 function [fibSeq, fibSum] = fibLengthSum(value)
-    fibSeq = 0; % the fibonacci sequence starts at 0
+    % Returns the fibonacci sequence up to the term of the input integer as
+    % well as the sum of all the numbers in that limited sequence
+    % Call format: fibLengthSum(value)
+    % Input
+    %   value: integer value that determines the length of the limited fibonacci sequence
+    % Outputs
+    %   fibSeq: vector of limited fibonacci sequence
+    %   fibSum: suum of the numbers of the limited fibonacci sequence
+
+    fibSeq = []; % the fibonacci sequence starts at 0
     nextFib = 1; % the second number of the fib seq is 1
 
-    for i = 1:number
-        if (number == 1)
-            fibSeq = 0;
-        elseif (number == 2)
-            fibSeq = [0, 1];
-        else
-            fibSeq = fibSeq + nextFib;
+    if (number == 1)
+        fibSeq = [0];
+    elseif (number == 2)
+        fibSeq = [0, 1];
+    else
+        fibSeq = [0, 1];
+        for i = 3:number
+            fibSeq(i) = fibSeq + nextFib;
             nextFib = nextFib(i-2) + nextFib(i-1);
         end
     end
