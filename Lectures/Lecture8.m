@@ -1,7 +1,7 @@
 % Shelley Wei
 % ENGR 130
-% Lecture 6
-% 10/3/23
+% Lecture 8
+% 10/17/23
 
 %% USER-DEFINED FUNCTIONS
 
