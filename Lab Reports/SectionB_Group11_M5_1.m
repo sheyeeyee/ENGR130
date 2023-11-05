@@ -13,12 +13,15 @@ clear; clc; close all;
 dt = 1/1024;
 
 time = linspace(0, 1-dt, 1024);
+% create an equally spaced time vercor with intervals of 1/1024
 
 numel(time);
+% check the time vercor has 1024 values
 
 % LAB 2
 amp = [1 20 5 3 17 1.5];
 freq = [12 17 20 5 15 5];
+% given amplitude and corresponding frequency for the composite signal
 
 % get the sum of y-values from the 6 components with different amplitudes and frequencies
 y_comp = getComposite(freq, amp, time);
@@ -26,45 +29,56 @@ y_comp = getComposite(freq, amp, time);
 % plot the composite signal (sin graphs stacked on each other)
 figure(1);
 plot(time, y_comp, "r");
+% labels
 title("Composite Signal Graph");
 xlabel("Time (sec)");
 ylabel("Midterm Grade for ENGR130 (unitless)"); % ~ Dr. Harper
 
 % 3. Analyze your signal via Fourier transform
 [f_comp, Y_comp] = ENGR130_Fourier(time, y_comp);
-
+% calculate the frequency and amplitude using the given fourier function
 figure(2);
 stem(f_comp,Y_comp);
-xlim([0,25])
+xlim([0,25])%limit x axis since there's nothing useful beyond 0.25
+% labels
 xlabel('Frequency');
 ylabel('Amplitude');
 title('Fourier Transform of the Composite Signal');
 
 % 4. Deconstruct a mystery signal
-load("mystery_signal.mat");
+load("mystery_signal.mat");%load the data that we need to analyze
 
 [fMystery, yMystery] = ENGR130_Fourier(time, mystery);
+% calculate the frequency and amplitude using the given fourier function
 
 figure(3)
 subplot(2, 1, 1);
+% create two subplots, and plot on the first subplot the mystery signal
 plot(time, mystery);
+% labels
 xlabel('Time (sec)');
 ylabel('Mystery Signal');
 title('Mystery Signal Sinusoid');
 
 subplot(2, 1, 2)
+% Plot on the second subplot the fourier transform of the mystery signal
 stem(fMystery, yMystery);
 xlim([0, 410])
+% labels
 xlabel('Frequency');
 ylabel('Amplitude');
 title('Fourier Transform of the Mystery Signal');
 
+% find the components of the mystery signal with amplitude greater than 4
 matrix = getComponentParams(fMystery, yMystery, 4);
 
+% eliminate the components with amplitude greater than 4 from mystery signal
 mysteryNoise = mystery - getComposite(matrix(:, 1), matrix(:, 2), time);
 
+% replot the mystery signal with components greater than 4 eliminated
 figure(4);
 plot(time,mysteryNoise);
+% labels
 ylabel('Noise Extracted from the Mystery Signal');
 xlabel('Time (sec)');
 title('Noise of the Mystery Signal');

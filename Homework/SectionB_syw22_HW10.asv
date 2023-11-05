@@ -2,19 +2,19 @@
 % ENGR 130
 % Homework 10
 % Started 11/1/23
-% Submitted 11/5/23
+% Submitted 11//23
 % Due 11/8/23
 
 %% Question 1
 clear; clc; close all;
 
-vec = [1 2 3 4 1]; % test vector
-[a, b] = mode_analysis(vec); % function has 2 outputs
+vec = [1 2 3 4 1];
+[a, b] = mode_analysis(vec);
 
 %% Question 2
 clear; clc; close all;
 
-numTerms = input("Please input an integer greater than 2 for the number of terms in the Fibonacci sequence:\n"); % Fib sequence must start w/ at least 0 and 1
+numTerms = input("Please input a positive integer value for the number of terms in the Fibonacci sequence:\n");
 fibonacci_gen_info(numTerms);
 
 %% Question 3
@@ -22,11 +22,11 @@ clear; clc; close all;
 
 load("HW10_heights.mat");
 
-[maxH, hundCm, greatestHeight] = heightAnalysis(species_A_heights, species_B_heights, species_C_heights); % function has 3 outputs
+[maxH, hundCm, greatestHeight] = heightAnalysis(species_A_heights, species_B_heights, species_C_heights);
 
-fprintf("Maximum Height of Species\n A: %.2f cm\n B: %.2f cm\n C: %.2f cm\n", maxH(1), maxH(2), maxH(3));
-fprintf("\nTime for Species Reach 100 cm in Height \n A: %i days\n B: %i days\n C: %i days\n", hundCm(1), hundCm(2), hundCm(3));
-fprintf("\nSpecies with Greatest Height Overall\n %s\n", greatestHeight);
+fprintf("Maximum Height of Species\n A: %.2f\n B: %.2f\n C: %.2f\n", maxH(1), maxH(2), maxH(3));
+fprintf("\nTime for Species Reach 100 cm: \n A: %i days\n B: %i days\n C: %i days\n", hundCm(1), hundCm(2), hundCm(3));
+fprintf("\nGreatest Height Overall: Species %s\n", greatestHeight);
 
 %% Functions
 % 1
@@ -53,8 +53,7 @@ end
 
 % 2
 function fibonacci_gen_info(value)
-    [fibSeq, fibSum] = fibLengthSum(value);
-    fibPrint(fibSeq, fibSum);
+    
 end
 
 function [fibSeq, fibSum] = fibLengthSum(value)
@@ -67,14 +66,18 @@ function [fibSeq, fibSum] = fibLengthSum(value)
     %   fibSeq: vector of limited fibonacci sequence
     %   fibSum: suum of the numbers of the limited fibonacci sequence
 
-    fibSeq = [0, 1]; % the fibonacci sequence always starts with 0 and 1
+    fibSeq = []; % the fibonacci sequence starts at 0
+    nextFib = 1; % the second number of the fib seq is 1
 
-    if (value < 3)
-        error("The Fibonacci Sequence must have at least two values. Please enter an integer greater than 2.");
+    if (number == 1)
+        fibSeq = [0];
+    elseif (number == 2)
+        fibSeq = [0, 1];
     else
         fibSeq = [0, 1];
-        for i = 3:value
-            fibSeq(i) = fibSeq(i-2) + fibSeq(i-1);
+        for i = 3:number
+            fibSeq(i) = fibSeq + nextFib;
+            nextFib = nextFib(i-2) + nextFib(i-1);
         end
     end
 
@@ -83,16 +86,14 @@ end
 
 function fibPrint(fibSeq, fibSum)
     numTerms = length(fibSeq);
-    fprintf("\nFibonacci Sequence Information:\n")
+    fprintf("Fibonacci Sequence Information:\n")
     fprintf(" Number of Terms: %i\n", numTerms);
     
-    fprintf(" Sequence: ");
-    for i = 1:numTerms-1
+    fprintf(" Sequence:\n");
+    for i = i:numTerms-1
         fprintf("%i, ", fibSeq(i));
     end
-    fprintf("%i\n", fibSeq(numTerms));
-
-    fprintf(" Sum of Numbers in Sequence: %i\n", fibSum);
+    fprintf("%i")
 end
 
 % 3
@@ -118,19 +119,19 @@ function [maxHeights, HundDay, greatestHeight] = heightAnalysis(aHeights, bHeigh
     % for-loop for each species
     for i = 1:length(aHeights) - 1
         if (aHeights(i) >= 100)
-            HundDay(1) = i;
+            HundDay(1) = i + 1;
             break;
         end
     end
     for i = 1:length(bHeights) - 1
         if (bHeights(i) >= 100)
-            HundDay(2) = i;
+            HundDay(2) = i + 1;
             break;
         end
     end
     for i = 1:length(cHeights) - 1
         if (cHeights(i) >= 100)
-            HundDay(3) = i;
+            HundDay(3) = i + 1;
             break;
         end
     end
