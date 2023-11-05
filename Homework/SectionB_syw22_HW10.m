@@ -30,31 +30,32 @@ fprintf("\nSpecies with Greatest Height Overall\n %s\n", greatestHeight);
 
 %% Functions
 % 1
-function [values, indexes] = mode_analysis(vec)
+function [values, indices] = mode_analysis(vec)
     % Finds the mode of the vector and the indices of the vector where the values equal the mode
     % Call format: mode_analysis(vector);
     % Inputs
-    %   vector: the set of numbers that the mode will be extracted from
+    %   vec: the set of numbers that the mode will be extracted from
     % Outputs
-    %   m: the mode value of the vector
+    %   values: the mode value of the vector
     %   indices: the indices of the vector where the values equal the mode
     
-    values = mode(vec);
-    indexes = [];
-    j = 1;
+    values = mode(vec); % find the mode
+    indices = []; % create vector for indices
+    j = 1; % set a counter for indices vector
     
+    % for-loop for finding indices of mode in vector
     for i = 1:length(vec)
-        if (vec(i) == values)
-            indexes(j) = i;
-            j = j + 1;
+        if (vec(i) == values) % check if value at current index equals mode
+            indices(j) = i; % indices value at j equals the index of the value equal to the mode in vec
+            j = j + 1; % iterate j
         end
     end
 end
 
 % 2
 function fibonacci_gen_info(value)
-    [fibSeq, fibSum] = fibLengthSum(value);
-    fibPrint(fibSeq, fibSum);
+    [fibSeq, fibSum] = fibLengthSum(value); % call function and set equal to outputs bc function has 2 outputs
+    fibPrint(fibSeq, fibSum); % function has no outputs
 end
 
 function [fibSeq, fibSum] = fibLengthSum(value)
@@ -69,16 +70,16 @@ function [fibSeq, fibSum] = fibLengthSum(value)
 
     fibSeq = [0, 1]; % the fibonacci sequence always starts with 0 and 1
 
-    if (value < 3)
+    if (value < 3) % checking if the user input is valid
         error("The Fibonacci Sequence must have at least two values. Please enter an integer greater than 2.");
-    else
-        fibSeq = [0, 1];
+    else % otherwise create the sequence
+        % for-loop for adding sequential numbers of Fib seq
         for i = 3:value
-            fibSeq(i) = fibSeq(i-2) + fibSeq(i-1);
+            fibSeq(i) = fibSeq(i-2) + fibSeq(i-1); % set the value at the current index equal to the sum of the previous two values
         end
     end
 
-    fibSum = sum(fibSeq);
+    fibSum = sum(fibSeq); % use sum function to find the sum of all the numbers in the Fib seq
 end
 
 function fibPrint(fibSeq, fibSum)
@@ -87,6 +88,7 @@ function fibPrint(fibSeq, fibSum)
     fprintf(" Number of Terms: %i\n", numTerms);
     
     fprintf(" Sequence: ");
+    % for-loop for printing the numbers in the seq
     for i = 1:numTerms-1
         fprintf("%i, ", fibSeq(i));
     end
@@ -116,22 +118,22 @@ function [maxHeights, HundDay, greatestHeight] = heightAnalysis(aHeights, bHeigh
     greatestHeight = "";
 
     % for-loop for each species
-    for i = 1:length(aHeights) - 1
+    for i = 1:length(aHeights)
         if (aHeights(i) >= 100)
             HundDay(1) = i;
-            break;
+            break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
-    for i = 1:length(bHeights) - 1
+    for i = 1:length(bHeights)
         if (bHeights(i) >= 100)
             HundDay(2) = i;
-            break;
+            break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
-    for i = 1:length(cHeights) - 1
+    for i = 1:length(cHeights)
         if (cHeights(i) >= 100)
             HundDay(3) = i;
-            break;
+            break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
     
