@@ -24,9 +24,9 @@ load("HW10_heights.mat");
 
 [maxH, hundCm, greatestHeight] = heightAnalysis(species_A_heights, species_B_heights, species_C_heights); % function has 3 outputs
 
-fprintf("Maximum Height of Species\n A: %.2f cm\n B: %.2f cm\n C: %.2f cm\n", maxH(1), maxH(2), maxH(3));
-fprintf("\nTime for Species Reach 100 cm in Height \n A: %i days\n B: %i days\n C: %i days\n", hundCm(1), hundCm(2), hundCm(3));
-fprintf("\nSpecies with Greatest Height Overall\n %s\n", greatestHeight);
+fprintf("Maximum Height of Species:\n A: %.2f cm\n B: %.2f cm\n C: %.2f cm\n", maxH(1), maxH(2), maxH(3));
+fprintf("\nTime for Species to Pass 100 cm in Height:\n A: %i days\n B: %i days\n C: %i days\n", hundCm(1), hundCm(2), hundCm(3));
+fprintf("\nSpecies with Greatest Height Overall:\n Species %s\n", greatestHeight);
 
 %% Functions
 % 1
@@ -120,19 +120,19 @@ function [maxHeights, HundDay, greatestHeight] = heightAnalysis(aHeights, bHeigh
     % for-loop for each species
     for i = 1:length(aHeights)
         if (aHeights(i) >= 100)
-            HundDay(1) = i;
+            HundDay(1) = i - 1; % subtract 1 from i for number of days it took for plant height to pass 100 cm
             break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
     for i = 1:length(bHeights)
         if (bHeights(i) >= 100)
-            HundDay(2) = i;
+            HundDay(2) = i - 1; % subtract 1 from i for number of days it took for plant height to pass 100 cm
             break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
     for i = 1:length(cHeights)
         if (cHeights(i) >= 100)
-            HundDay(3) = i;
+            HundDay(3) = i - 1; % subtract 1 from i for number of days it took for plant height to pass 100 cm
             break; % stop finding heights greater than or equal to 100 cm after the first time
         end
     end
