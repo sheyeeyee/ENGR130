@@ -1,7 +1,7 @@
 % Shelley Wei
 % ENGR 130
-% Lecture 8
-% 10/17/23
+% Lecture 9
+% 10/31/23
 
 %% Example
 clear; clc; close all;
