@@ -23,7 +23,7 @@ for i = 1:numTickets
     fprintf("   %05i\n", ranTicketNum(i)); % data format %05 means to have zeros in front of digits after the thousands, hundreds, tens, so on
 end
 
-winningNumber = win();
+winningNumber = win()
 % winningNumber = 10000; % sanity check
 
 zeroOrOne = winOrNot(numTickets, ranTicketNum, winningNumber);
@@ -50,15 +50,30 @@ function randNum = buy(num)
     %   randNum: randomly generated 5-digit number associated with ticket
     
     digits = zeros(1, 5);
-    randNum = zeros(num, 1);
+    randNum = [];
     
     for i = 1:num
         for j = 1:length(digits)
             digits(j) = randi(10) - 1;
-        end        
-        randNum(i) = polyval(digits, 10); % creates a polynomial that sums the multiplication of each coefficient (digits) by 10 to decreasing powers
+        end
         
-        % how do you check if the ticket numbers are the same?
+        temp = polyval(digits, 10); % creates a polynomial that sums the multiplication of each coefficient (digits) by 10 to decreasing powers
+        
+        check = 1;
+
+        if (i > 1)
+            while check <= length(randNum)
+                if (temp == randNum(check))
+                    i = i - 1;
+                    break;
+                else
+                    randNum(i) = temp;
+                end
+                check = check + 1;
+            end
+        else
+            randNum(i) = temp;
+        end
     end
     % disp(randNum); % sanity check
 end
