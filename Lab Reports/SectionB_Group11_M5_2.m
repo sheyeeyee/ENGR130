@@ -5,6 +5,7 @@
 % Finished 11/7/23
 % Due 11/13/23
 
+%% LAB 3
 % 2. Collect and process data from the oscilloscope
 clear; clc; close all;
 
@@ -33,6 +34,123 @@ freq = getComponentParams(f1, y1, 0.2);
 % plot(time, freqMajor);
 
 fprintf("The heartrate is %.2f beats per minute.\n", freq(1, 1)*60);
+
+%% LAB 4
+
+clear; clc; close all;
+
+vector_norm = readmatrix("ECG_norm.csv");
+vector_1 = readmatrix("ECG1.csv");
+vector_2 = readmatrix("ECG2.csv");
+vector_3 = readmatrix("ECG3.csv");
+vector_4 = readmatrix("ECG4.csv");
+vector_5 = readmatrix("ECG5.csv");
+
+vector_norm =vector_norm';
+vector_1 =vector_1';
+vector_2 =vector_2';
+vector_3 =vector_3';
+vector_4 =vector_4';
+vector_5 =vector_5';
+
+norm_peak(1)=0;
+o=1;
+for i=2:length(vector_3(2,:))-1
+    if(vector_norm(2,i-1)<vector_norm(2,i) & vector_norm(2,i)>vector_norm(2,i+1) & vector_norm(2,i) > 4000)
+        norm_peak(o)=i;
+        o=o+1;
+    end
+end
+
+one_peak(1)=0;
+o=1;
+for i=2:length(vector_1(2,:))-1
+    if(vector_1(2,i-1)<vector_1(2,i) & vector_1(2,i)>vector_1(2,i+1) & vector_1(2,i) > 4000)
+        one_peak(o)=i;
+        o=o+1;
+    end
+end
+
+
+two_peaks(1)=0;
+o=1;
+for i=2:length(vector_2(2,:))-1
+    if(vector_2(2,i-1)<vector_2(2,i) & vector_2(2,i)>vector_2(2,i+1) & vector_2(2,i) > 4000)
+        two_peaks(o)=i;
+        o=o+1;
+    end
+end
+
+
+three_peaks(1) = 0;
+o = 1;
+for i = 2:length(vector_3(2,:))-1
+    if(vector_3(2,i-1) < vector_3(2,i) & vector_3(2,i) > vector_3(2,i+1) & vector_3(2,i) > 4000)
+        three_peaks(o)=i;
+        o=o+1;
+    end
+end
+
+four_peaks(1) = 0;
+o = 1;
+for i = 2:length(vector_4(2,:))-1
+    if(vector_4(2,i-1) < vector_4(2,i) & vector_4(2,i) > vector_4(2,i+1) & vector_4(2,i) > 4000)
+        four_peaks(o)=i;
+        o = o + 1;
+    end
+end
+
+five_peaks(1) = 0;
+o = 1;
+for i = 2:length(vector_5(2,:))-1
+    if (vector_5(2,i-1)<vector_5(2,i) & vector_5(2,i)>vector_5(2,i+1) & vector_5(2,i) > 4000)
+        five_peaks(o)=i;
+        o=o+1;
+    end
+end
+
+
+heartbeat_norm = 60/((vector_norm(1,norm_peak(length(norm_peak)))-vector_norm(1,norm_peak(1)))/length(norm_peak));
+heartbeat_1 = 60/((vector_1(1,one_peak(length(one_peak)))-vector_1(1,one_peak(1)))/length(one_peak));
+heartbeat_2 = 60/((vector_2(1,two_peaks(length(two_peaks)))-vector_2(1,two_peaks(1)))/length(two_peaks));
+heartbeat_3 = 60/((vector_3(1,three_peaks(length(three_peaks)))-vector_3(1,three_peaks(1)))/length(three_peaks));
+heartbeat_4 = 60/((vector_4(1, four_peaks(length(four_peaks)))-vector_4(1,four_peaks(1)))/length(four_peaks));
+heartbeat_5 = 60/((vector_5(1,five_peaks(length(five_peaks)))-vector_5(1,five_peaks(1)))/length(five_peaks));
+
+heartbeats = [heartbeat_1, heartbeat_2, heartbeat_3, heartbeat_4, heartbeat_5];
+
+a = arduino();
+buzzPin = 'D8';
+
+% frequencies for notes
+cNote = 2093;
+ebNote = 2489.02;
+gNote = 3135.96;
+bbNote = 3729.31;
+
+for i = 1:length(heartbeats)
+   if (heartbeats(i) < 60 )
+       playTone(a, buzzPin, cNote, 1); % play C
+       pause(1);
+       playTone(a, buzzPin, cNote, 0); % play C
+       pause(1);
+   elseif (heartbeats(i) > 100)
+       playTone(a, buzzPin, ebNote, 1); % play E flat
+       pause(1);
+       playTone(a, buzzPin, ebNote, 0); % play E flat
+       pause(1);
+   % elseif (2)
+   %     playTone(a, buzzPin, gNote, 1); % play G
+   %     pause(0.1);
+   %     playTone(a, buzzPin, gNote, 0); % play G
+   %     pause(0.1);
+   % else
+   %     playTone(a, buzzPin, bbNote, 1); % play B flat
+   %     pause(0.1);
+   %     playTone(a, buzzPin, bbNote, 0); % play B flat
+   %     pause(0.1);
+   end
+end
 
 %% Functions
 function  y = getSinusoid(f,A,t)
