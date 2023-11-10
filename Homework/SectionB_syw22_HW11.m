@@ -23,7 +23,7 @@ for i = 1:numTickets
     fprintf("   %05i\n", ranTicketNum(i)); % data format %05 means to have zeros in front of digits after the thousands, hundreds, tens, so on
 end
 
-winningNumber = win()
+winningNumber = win();
 % winningNumber = 10000; % sanity check
 
 zeroOrOne = winOrNot(numTickets, ranTicketNum, winningNumber);
@@ -58,21 +58,19 @@ function randNum = buy(num)
         end
         
         temp = polyval(digits, 10); % creates a polynomial that sums the multiplication of each coefficient (digits) by 10 to decreasing powers
-        
-        check = 1;
 
-        if (i > 1)
-            while check <= length(randNum)
-                if (temp == randNum(check))
-                    i = i - 1;
-                    break;
-                else
-                    randNum(i) = temp;
-                end
-                check = check + 1;
+        check = 0;
+
+        for k = 1:length(randNum)
+            if (temp == randNum(k))
+                % num = num + 1;
+                check = 1;
+                break;
             end
-        else
-            randNum(i) = temp;
+        end
+
+        if (check == 0)
+            randNum = [randNum, temp];
         end
     end
     % disp(randNum); % sanity check
