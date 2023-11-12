@@ -38,9 +38,14 @@ end
 clear; clc; close all;
 
 playerMoney = 10;
+numberSpins = 3;
+playAgainBool = 1;
 
-randLetters = spinSlot(7, playerMoney);
-printSpin(randLetters, playerMoney);
+if (playAgainBool == 1)
+    randLetters = spinSlot(numberSpins, playerMoney);
+    printSpin(randLetters, playerMoney);
+    % playAgainBool = playAgain(playAgainBool, playerMoney);
+end
 
 %% Functions
 % Question 1
@@ -134,6 +139,11 @@ function slotLetters = spinSlot(numSpins, money)
             end
             slotLetters(i, :) = letter;
         end
+        
+        if (money < numSpins*2)
+            numSpins = money/2;
+            fprintf("You only have enough money for %i spins.", numSpins);
+        end
     end
 end
 
@@ -145,7 +155,7 @@ function printSpin(spinLetters, money)
     
     for i = 1:row
         for j = 1:col
-            if (mod(j, 3) == 1)
+            if (j == 1)
                 if (spinLetters(i, j) == 1)
                     fprintf("\nA ");
                 elseif (spinLetters(i, j) == 2)
@@ -153,7 +163,7 @@ function printSpin(spinLetters, money)
                 else
                     fprintf("\nC ");
                 end
-            else
+            elseif (j == 2)
                 if (spinLetters(i, j) == 1)
                     fprintf("A ");
                 elseif (spinLetters(i, j) == 2)
@@ -161,23 +171,46 @@ function printSpin(spinLetters, money)
                 else
                     fprintf("C ");
                 end
-            end
-            
-            if (mod(j, 3) == 0)
-                if (j == 1 && spinLetters(i, j) == 1 && spinLetters(i, j+1) == 1 && spinLetters(i, j+2) == 1)
-                    money = money + 2;
-                    fprintf("\nYou won $2!\n");
-                    break;
-                else
+            else
+                if (spinLetters(i, j) == 1)
+                    fprintf("A\n");
+                    
+                    if (spinLetters(i, j-1) == 1 && spinLetters(i, j-2) == 1)
+                        money = money + 2;
+                        fprintf("Winner Winner Chicken Dinner! You won $2!\n");
+                    else
+                        money = money - 2;
+                        fprintf("You lost $2! Better luck next time...\n");
+                    end
+                elseif (spinLetters(i, j) == 2)
+                    fprintf("B\n");
+
                     money = money - 2;
-                    fprintf("\nYou lost $2!\n");
+                    fprintf("You lost $2! Better luck next time...\n");
+                else
+                    fprintf("C\n");
+
+                    money = money - 2;
+                    fprintf("You lost $2! Better luck next time...\n");
                 end
-                fprintf("You now have $%i left.\n", money);
+
+                fprintf("You have $%i left.\n", money)
             end
         end
+
         if (money == 0)
-            fprintf("You have no money left!\n");
+            fprintf("Oh no, you have no money left! You are out of spins.\n");
             break;
         end
     end
+end
+
+function playOrNay = playAgain(playBoolean, money)
+% comment block
+
+if (money > 0)
+    playOrNay = input("Would you like to spin more? Press 1 or 2 to proceed.\n 1. Yes    2. No\n");
+else
+    playBoolean = 0;
+end
 end
