@@ -37,7 +37,10 @@ end
 %% Question 2
 clear; clc; close all;
 
-spinSlot(5);
+playerMoney = 10;
+
+randLetters = spinSlot(7);
+printSpin(randLetters, playerMoney);
 
 %% Functions
 % Question 1
@@ -130,5 +133,64 @@ function slotLetters = spinSlot(numSpins)
         end
         slotLetters(i, :) = letter;
     end
-    disp(slotLetters);
+
+    % [row, col] = size(slotLetters);
+    % 
+    % for i = 1:row
+    %     for j = 1:col
+    %         if (slotLetters(row, col) == 1)
+    %             slotLetters(row, col) = "A";
+    %         elseif (slotLetters(row, col) == 2)
+    %             slotLetters(row, col) = "B";
+    %         else
+    %             slotLetters(row, col) = "C";
+    %         end
+    %     end
+    % end
+    % slotLetters
+end
+
+function printSpin(spinLetters, money)
+% comment block
+    [row, col] = size(spinLetters);
+    
+    fprintf("Here are your spins: ");
+    
+    for i = 1:row
+        for j = 1:col
+            if (mod(j, 3) == 1)
+                if (spinLetters(i, j) == 1)
+                    fprintf("\nA ");
+                elseif (spinLetters(i, j) == 2)
+                    fprintf("\nB ");
+                else
+                    fprintf("\nC ");
+                end
+            else
+                if (spinLetters(i, j) == 1)
+                    fprintf("A ");
+                elseif (spinLetters(i, j) == 2)
+                    fprintf("B ");
+                else
+                    fprintf("C ");
+                end
+            end
+            
+            if (mod(j, 3) == 0)
+                if (j == 1 && spinLetters(i, j) == 1 && spinLetters(i, j+1) == 1 && spinLetters(i, j+2) == 1)
+                    money = money + 2;
+                    fprintf("\nYou won $2!\n");
+                    break;
+                else
+                    money = money - 2;
+                    fprintf("\nYou lost $2!\n");
+                end
+                fprintf("You now have $%i left.\n", money);
+    
+                if (money == 0)
+    
+                end
+            end
+        end
+    end
 end
