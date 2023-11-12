@@ -39,7 +39,7 @@ clear; clc; close all;
 
 playerMoney = 10;
 
-randLetters = spinSlot(7);
+randLetters = spinSlot(7, playerMoney);
 printSpin(randLetters, playerMoney);
 
 %% Functions
@@ -117,7 +117,7 @@ function yayOrNay = winOrNot(num, ticketNumbers, winNum)
 end
 
 % Question 2
-function slotLetters = spinSlot(numSpins)
+function slotLetters = spinSlot(numSpins, money)
     % Generates letters A, B, or C corresponding to 1, 2, or 3 for each reek for each spin
     % Call format: spinSlot(numSpins)
     % Input
@@ -125,29 +125,16 @@ function slotLetters = spinSlot(numSpins)
     % Output
     %   letters: letters generated for all spins
     
-    slotLetters = zeros(1, 3);
-
-    for i = 1:numSpins
-        for j = 1:3
-            letter(j) = randi(3);
+    if (money > 1)
+        slotLetters = zeros(1, 3);
+    
+        for i = 1:numSpins
+            for j = 1:3
+                letter(j) = randi(3);
+            end
+            slotLetters(i, :) = letter;
         end
-        slotLetters(i, :) = letter;
     end
-
-    % [row, col] = size(slotLetters);
-    % 
-    % for i = 1:row
-    %     for j = 1:col
-    %         if (slotLetters(row, col) == 1)
-    %             slotLetters(row, col) = "A";
-    %         elseif (slotLetters(row, col) == 2)
-    %             slotLetters(row, col) = "B";
-    %         else
-    %             slotLetters(row, col) = "C";
-    %         end
-    %     end
-    % end
-    % slotLetters
 end
 
 function printSpin(spinLetters, money)
@@ -186,11 +173,11 @@ function printSpin(spinLetters, money)
                     fprintf("\nYou lost $2!\n");
                 end
                 fprintf("You now have $%i left.\n", money);
-    
-                if (money == 0)
-    
-                end
             end
+        end
+        if (money == 0)
+            fprintf("You have no money left!\n");
+            break;
         end
     end
 end
