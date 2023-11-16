@@ -17,17 +17,17 @@ d = 45;
 x_vel = a + (a+b)*rand([num_orange,1]); % m/s; constant horizontal velocity
 y_vel = c + (c+d)*rand([num_orange,1]); % m/s; initial vertical velocity
 
-missed_it = 0; % initialize counter for number of oranges that miss
+made_it = 0; % initialize counter for number of oranges that hit the pile
 
 figure()
 for n = 1 : num_orange
     % call the user-defined function
-    missed_it = missed_it + orange_flight(x_vel(n), y_vel(n));
+    made_it = made_it + orange_flight(x_vel(n), y_vel(n));
 end
 
 hold off
 
-fprintf('%i oranges will miss the compost pile.\n', missed_it)
+fprintf('%i oranges will land in the compost pile.\n', made_it)
 
 function [compost] = orange_flight(vy, vx)
 
@@ -62,11 +62,11 @@ while y(idx) >= 0
 end
 
 if x(idx) == compost_dist
-    % if the orange misses the compost pile
+    % if the orange makes it into the compost pile
     compost = compost + 1;
 
 else
-    % if the orange makes it into the compost pile
+    % if the orange misses the compost pile
     plot(y,x, '*')
     title('Flights of Oranges that Missed the Compost Pile')
     xlabel('horizontal distance (m)')

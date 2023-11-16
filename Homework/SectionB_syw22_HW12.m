@@ -22,8 +22,7 @@ d = 45;
 x_vel = a + (a + b) * rand([num_orange, 1]); % m/s; constant horizontal velocity
 y_vel = c + (c + d) * rand([num_orange, 1]); % m/s; initial vertical velocity
 
-missed_it = 0; % initialize counter for number of oranges that miss
-made_it = 0; %*** initialize a counter for number of oranges that make it
+made_it = 0; % initialize counter for number of oranges that hit the pile
 
 figure();
 hold on; %*** forgot hold on
@@ -31,7 +30,6 @@ hold on; %*** forgot hold on
 for n = 1:num_orange
     % call the user-defined function
     made_it = made_it + orange_flight(x_vel(n), y_vel(n)); %*** iterate the variable for number of oranges made into the compost
-    missed_it = missed_it + (num_orange - made_it);
 end
 
 hold off
@@ -41,6 +39,12 @@ fprintf('%i oranges will make the compost pile.\n', made_it); %*** trying to pri
 %% Problem 3
 clear; clc; close all;
 
+% Problem Statement
+
+%% Code w/ Errors
+clear; clc; close all;
+
+%% Code w/o Errors
 
 
 %% Functions
