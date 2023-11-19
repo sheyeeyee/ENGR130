@@ -207,7 +207,7 @@ for idx = 1:length(r)
         count = 0;
     else
         count = count + 1;
-    end
+    end 
 end
 settleindex = length(r) - count;
 settlet = t(settleindex);
@@ -283,7 +283,7 @@ switch nargin
                 warning("This is not a valid character!")
         end
         
-    case 6
+        case 6
         switch varargin{1}
             case 'P'
                 Kp = varargin{2};
@@ -336,4 +336,5 @@ else
     new_RPM = -1;
     warning("The controller cannot use one of your values! It is too high!")
 end
+
 end
