@@ -40,12 +40,23 @@ fprintf('%i oranges will make the compost pile.\n', made_it); %*** trying to pri
 clear; clc; close all;
 
 % Problem Statement
+    % Shrek Quote Generator
 
 %% Code w/ Errors
 clear; clc; close all;
 
-%% Code w/o Errors
 
+
+%% Code w/o Errors
+clear; clc; close all;
+
+% create vector of numbers that correspond to quote
+numQuotes = 17;
+quoteCatalog = 1:numQuotes;
+
+fprintf("'Once upon a time there was a lovely princess. But she had an enchantment upon her of a fearful sort which could only be broken by love's first kiss. \n\nShe was locked away in a castle guarded by a terrible fire-breathing dragon. Many brave knights had attempted to free her from this dreadful prison, \nbut none prevailed. She waited in the dragon's keep in the highest room of the tallest tower for her true love and true love's first kiss.' \n\n(laughs) Like that's ever gonna happen. What a load of -- \n(toilet flush)\n");
+
+fprintf("\nSomebody once told me the world was gonna roll me. I ain't the sharpest tool in the sheeed (music note)");
 
 %% Functions
 % Problem 2
