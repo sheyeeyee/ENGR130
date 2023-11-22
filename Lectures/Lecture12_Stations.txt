@@ -1,0 +1,12 @@
+Station	Hrs	Thumbs_Up	Thumbs_Down
+Styx	32	14	4
+Beatles	24.5	31	6
+Simon&Garfunkle	15.2	40	3
+EllaFitzgerald	44.6	49	7
+LadyGaga	10.7	17	2
+Mozart	36.6	45	5
+Drake   2   5   14
+ReneeFleming	5.7	16	1
+AudraMcDonald	27.4	38	9
+TaylorSwift     50.5    87  0
+#
