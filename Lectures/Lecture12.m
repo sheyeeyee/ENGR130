@@ -38,10 +38,12 @@ i = 1;
 stationName = [""];
 
 while (fscanf(stations, "%s", 1) ~= "#")
-    stationName(i) = fscanf(stations, "%s", 1);
+    % stationName(i) = fscanf(stations, "%s", 1);
     hrs(i) = fscanf(stations, "%f", 1);
     up(i) = fscanf(stations, "%i", 1);
     down(i) = fscanf(stations, "%i", 1);
 
     i = i + 1;
 end
+
+fclose(stations);
