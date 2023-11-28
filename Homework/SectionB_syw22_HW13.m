@@ -47,14 +47,12 @@ sackStats = fopen("HW13_SackLeaders.txt", "r");
 
 fscanf(sackStats, "%s", 4);
 
-strFormatters = "%s %s";
-floatIntFormatters = "%f %i";
-strSize = [2, 20];
-
-names = fscanf(sackStats, strFormatters, strSize)
-% lastName = fscanf(sackStats, strFormatters, 2);
-
 rows = 20;
+
+lastName = "";
+firstName = "";
+sacks = zeros(1, rows);
+games = zeros(1, rows);
 
 for i = 1:rows
     lastName(i) = fscanf(sackStats, "%s", 1);
@@ -63,4 +61,64 @@ for i = 1:rows
     games(i) = fscanf(sackStats, "%i", 1);
 end
 
-% sacksPerGame = sacks ./ games;
+sacksPerGame = sacks ./ games;
+
+rankings = sortSacks(sacksPerGame);
+
+numSacks = input("How many sacks does your favorite player have?\n");
+numGames = input("How many games has your favorite player played?\n");
+
+userSacksPerGame = numSacks / numGames;
+
+for i = 1:rows
+    % determine user's fav player's rank
+    
+end
+
+fprintf("Your player would rank %i out of 21 players.\n", rank);
+
+userPlayer = fopen("Homework\HW13_answer.txt", "w");
+fprintf(userPlayer, "Your favorite player has sacked %i times in %i games. On average, they've sacked %f times per game.\n", numSacks, numGames, userSacksPerGame);
+fclose(userPlayer);
+
+%% Functions
+function ranked = sortSacks(sacksGame)
+    % Sorts the sacks per game from most to least and returns the sorted data in a vector (ranking the players)
+    % Call format: sortSacks(sacksPerGame)
+    % Input
+    %   sacksPerGame: vector of sacks per game for respective players
+    % Output
+    %   sortedStats: sorted vector of sacks per game
+    
+    rows = length(sacksGame);
+    
+    for i = 1:rows-1 % subtract 1 because element at current index will be compared to the element at the following index, so i can't go past the length of the vector
+        if (sacksGame(i) < sacksGame(i+1))
+            temp = sacksGame(i); % create a temporary variable to store the current element so that it can be moved to the following index after the following element is moved to the current index
+            sacksGame(i) = sacksGame(i+1); % set the element at the current index equal to the element at the following index since it's greater than the one at the current index
+            sacksGame(i+1) = temp; % set the element at the following index equal to the element at the current index since it's smaller than the one at the following index
+        end
+    end
+
+    ranked = sacksGame % set the output equal to the sorted vector
+end
+
+function userRank = rankUserPlayer(userSacksGame, sacksGame)
+% Determines where the user's favorite player ranks in the given set of players
+% Call format: rankUserPlayer(userSacksGame)
+% Input
+%   userSacksGame: the calculated value of sacks per game of the user's player
+% Output
+%   userRank: the rank of the user's player among the given set of players
+
+rows = length(sacksGame);
+    
+    for i = 1:rows-1 % subtract 1 because element at current index will be compared to the element at the following index, so i can't go past the length of the vector
+        if (sacksGame(i) < sacksGame(i+1))
+            temp = sacksGame(i); % create a temporary variable to store the current element so that it can be moved to the following index after the following element is moved to the current index
+            sacksGame(i) = sacksGame(i+1); % set the element at the current index equal to the element at the following index since it's greater than the one at the current index
+            sacksGame(i+1) = temp; % set the element at the following index equal to the element at the current index since it's smaller than the one at the following index
+        end
+    end
+
+end
