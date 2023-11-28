@@ -70,12 +70,9 @@ numGames = input("How many games has your favorite player played?\n");
 
 userSacksPerGame = numSacks / numGames;
 
-for i = 1:rows
-    % determine user's fav player's rank
-    
-end
+userPlayerRank = rankUserPlayer(userSacksPerGame, rankings);
 
-fprintf("Your player would rank %i out of 21 players.\n", rank);
+fprintf("Your player would rank %i out of 21 players.\n", userPlayerRank);
 
 userPlayer = fopen("Homework\HW13_answer.txt", "w");
 fprintf(userPlayer, "Your favorite player has sacked %i times in %i games. On average, they've sacked %f times per game.\n", numSacks, numGames, userSacksPerGame);
@@ -103,15 +100,17 @@ function ranked = sortSacks(sacksGame)
     ranked = sacksGame % set the output equal to the sorted vector
 end
 
-function userRank = rankUserPlayer(userSacksGame, sacksGame)
-% Determines where the user's favorite player ranks in the given set of players
-% Call format: rankUserPlayer(userSacksGame)
-% Input
-%   userSacksGame: the calculated value of sacks per game of the user's player
-% Output
-%   userRank: the rank of the user's player among the given set of players
-
-rows = length(sacksGame);
+function userRank = rankUserPlayer(userSacksGame, sortedSacksGame)
+    % Determines where the user's favorite player ranks in the given set of players
+    % Call format: rankUserPlayer(userSacksGame)
+    % Input
+    %   userSacksGame: the calculated value of sacks per game of the user's player
+    % Output
+    %   userRank: the rank of the user's player among the given set of players
+    
+    sacksGame = [userSacksGame, sortedSacksGame];
+    
+    rows = length(sacksGame);
     
     for i = 1:rows-1 % subtract 1 because element at current index will be compared to the element at the following index, so i can't go past the length of the vector
         if (sacksGame(i) < sacksGame(i+1))
@@ -120,5 +119,10 @@ rows = length(sacksGame);
             sacksGame(i+1) = temp; % set the element at the following index equal to the element at the current index since it's smaller than the one at the following index
         end
     end
+
+    % sacksGame % sanity check
+
+    % find the index of the user's player in the rankings
+    userRank = find(sacksGame == userSacksGame);
 
 end
