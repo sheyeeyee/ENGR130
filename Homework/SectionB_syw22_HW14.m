@@ -2,7 +2,7 @@
 % ENGR 130
 % Homework 14
 % Started 11/28/23
-% Submitted 12//23
+% Submitted 11/30/23
 % Due 12/6/23
 
 %% Question 1
@@ -49,44 +49,12 @@ fprintf("Name: %s\nDistance from Earth: %.3f parsecs\nApparent Magnitude: %.3f\n
 
 starCalc = fopen("StarCalcs.txt", "w");
 
-col = 1;
-
 for i = 1:stars
     fprintf(starCalc, "%s\t", name(i));
     fprintf(starCalc, "%f\t", dist(i));
     fprintf(starCalc, "%s\t", specType(i));
     fprintf(starCalc, "%f\t", appMag(i));
     fprintf(starCalc, "%f\n", absMag(i));
-    % if (i < stars+1)
-    %     if (col == 1)
-    %         fprintf("col 1 "); % sanity check
-    %         fprintf(starCalc, "%s\n", name(i));
-    %     elseif (col == 2)
-    %         % fprintf(starCalc, "\t");
-    %         fprintf("col 2 "); % sanity check
-    %         fprintf(starCalc, "%f\n", dist(i));
-    %     elseif (col == 3)
-    %         % fprintf(starCalc, "\t");
-    %         fprintf("col 3 "); % sanity check
-    %         fprintf(starCalc, "%f\n", specType(i));
-    %     elseif (col == 4)
-    %         % fprintf(starCalc, "\t");
-    %         fprintf("col 4 "); % sanity check
-    %         fprintf(starCalc, "%f\n", appMag(i));
-    %     elseif (col == 5)
-    %         % fprintf(starCalc, "\t");
-    %         fprintf("col 5 "); % sanity check
-    %         fprintf(starCalc, "%f\n", absMag(i));
-    %     end
-    % elseif (i > stars)
-    %     fprintf("sanity check ");
-    %     i = 1;
-    %     col = col + 1;
-    % end
-    % 
-    % % sanity checks
-    % fprintf("\ni = %i\n", i);
-    % fprintf("column = %i\n\n", col);
 end
 
 fclose(starCalc);
