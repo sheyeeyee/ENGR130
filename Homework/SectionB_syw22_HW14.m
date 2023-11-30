@@ -32,16 +32,64 @@ for i = 1:stars
     appMag(i) = fscanf(starData, "%f", 1);
 end
 
+fclose(starData);
+
 [numK, perK] = specK(specType, stars); % use function to find the number of stars and percentage of stars with spec type K
-fprintf("The number of stars with spectral type K is %i and the percentage of stars with spectral type K is %.2f%%\n", numK, perK);
+fprintf("The number of stars with spectral type K is %i and the percentage of stars with spectral type K is %.3f%%.\n", numK, perK);
 
 [furthest, closest] = farClose(dist, name);
 fprintf("The farthest star from Earth is %s. The closest is %s.\n", furthest, closest);
 
+absMag = absoluteMagnitude(appMag, dist);
+
 userStar = input("\nPlease type the corresponding number to the star you would like to see information on.\n   1) Sol   2) Sirius   3) Canopus   4) Arcturus   5) AlphaCentauri   6) Vega   7) Capella\n   8) Rigel   9) Procyon   10) Achernar   11) Betelgeuse   12) Hadar   13) Altair   14) Aldebaran\n   15) Spica   16) Antares   17) Pollux   18) Fomalhaut   19) Deneb   20) Mimosa   21) Regulus\n");
 
 [uName, uDist, uApp, uAbs] = userStarInfo(userStar, stars, name, dist, appMag);
-fprintf("Name: %s\nDistance from Earth: %.3f\nApparent Magnitude: %.3f\nAbsolute Magnitude: %.3f\n", uName, uDist, uApp, uAbs);
+fprintf("Name: %s\nDistance from Earth: %.3f parsecs\nApparent Magnitude: %.3f\nAbsolute Magnitude: %.3f\n", uName, uDist, uApp, uAbs);
+
+starCalc = fopen("StarCalcs.txt", "w");
+
+col = 1;
+
+for i = 1:stars
+    fprintf(starCalc, "%s\t", name(i));
+    fprintf(starCalc, "%f\t", dist(i));
+    fprintf(starCalc, "%s\t", specType(i));
+    fprintf(starCalc, "%f\t", appMag(i));
+    fprintf(starCalc, "%f\n", absMag(i));
+    % if (i < stars+1)
+    %     if (col == 1)
+    %         fprintf("col 1 "); % sanity check
+    %         fprintf(starCalc, "%s\n", name(i));
+    %     elseif (col == 2)
+    %         % fprintf(starCalc, "\t");
+    %         fprintf("col 2 "); % sanity check
+    %         fprintf(starCalc, "%f\n", dist(i));
+    %     elseif (col == 3)
+    %         % fprintf(starCalc, "\t");
+    %         fprintf("col 3 "); % sanity check
+    %         fprintf(starCalc, "%f\n", specType(i));
+    %     elseif (col == 4)
+    %         % fprintf(starCalc, "\t");
+    %         fprintf("col 4 "); % sanity check
+    %         fprintf(starCalc, "%f\n", appMag(i));
+    %     elseif (col == 5)
+    %         % fprintf(starCalc, "\t");
+    %         fprintf("col 5 "); % sanity check
+    %         fprintf(starCalc, "%f\n", absMag(i));
+    %     end
+    % elseif (i > stars)
+    %     fprintf("sanity check ");
+    %     i = 1;
+    %     col = col + 1;
+    % end
+    % 
+    % % sanity checks
+    % fprintf("\ni = %i\n", i);
+    % fprintf("column = %i\n\n", col);
+end
+
+fclose(starCalc);
 
 %% Functions
 % Question 1
@@ -76,6 +124,7 @@ function [encoded] = myFunction(message)
 end
 
 % Question 2
+% Function 1
 function [countK, percentK] = specK(spec, numStars)
     % Counts the number of stars with spectral type K and calculates the percentage of stars with spectral type K
     % Call format: specK(spec, numStars)
@@ -98,6 +147,7 @@ function [countK, percentK] = specK(spec, numStars)
     percentK = countK / numStars * 100; % calculate the percentage of stars with spec type K using the count of stars with spec type K
 end
 
+% Function 2
 function [far, close] = farClose(distances, names)
     % Find which stars are the furthest and closest (excluding the sun)
     % Call format: farClose(distances, numStars)
@@ -118,6 +168,7 @@ function [far, close] = farClose(distances, names)
     close = names(find(distances == closeDist)); % find the closest star's name
 end
 
+% Function 3
 function absoluteMag = absoluteMagnitude(appMag, distances)
     % Calculates the absolute magnitude of the stars based on the apparent magnitudes and distances between the stars and Earth
     % Call format: absoluteMagnitude(appMag, distances)
@@ -130,17 +181,23 @@ function absoluteMag = absoluteMagnitude(appMag, distances)
     absoluteMag = appMag - 5 * log10(distances) + 5;
 end
 
+% Function 4
 function [n, d, app, abs] = userStarInfo(userStarNum, numStars, names, distances, appMags)
     % comment block
     
     absMags = absoluteMagnitude(appMags, distances);
     
-    for i = 1:numStars    
+    i = 1;
+
+    % MEANINGFUL WHILE-LOOP
+    while i <= numStars    
         if (i == userStarNum)
             n = names(i);
             d = distances(i);
             app = appMags(i);
             abs = absMags(i);
         end
+
+        i = i + 1;
     end
 end
