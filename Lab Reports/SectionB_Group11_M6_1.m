@@ -22,7 +22,7 @@ yline(1000)
 % percentage, rise time, and settling time of the wave
 [steadyvalue, maximum, rising, settling] = getWaveformData(RPM, time);
 
-%% Lab 2 P
+%% LAB 2 P
 clear;
 clc;
 close all;
