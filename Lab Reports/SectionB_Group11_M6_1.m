@@ -8,7 +8,7 @@ clc;
 close all;
 
 % loading the external file
-load('MEASURED_RPM.mat')
+load('M5_MEASURED_RPM.mat')
 
 % graphing RPM vs time
 plot(time, RPM)

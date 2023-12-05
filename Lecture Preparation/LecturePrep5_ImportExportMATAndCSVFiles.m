@@ -45,10 +45,10 @@ numbers = [1, 2, 3, 4];
 first_line = 'This is my text variable.';
 
 %% save all variables
-save('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_sample_file_1.mat');
+save('Lecture Preparation\LecturePrep5_sample_file_1.mat');
 
 %% save only one variable
-save('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_sample_file_2.mat', 'numbers');
+save('Lecture Preparation\LecturePrep5_sample_file_2.mat', 'numbers');
 
 %% Practice 2.1
 clear;
@@ -60,7 +60,7 @@ altitudes1k = altitudes1 * 1000; % multiple all altitudes by 1000 to get the act
 kelvin = [288, 281, 269, 256, 223]; % create a vector for temp at each alt
 alt_temps = [altitudes1k', kelvin']; % create matrix for altitudes and temp
 
-save('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_alt_temps.mat', 'alt_temps'); % save the matrix to a .MAT file
+save('Lecture Preparation\LecturePrep5_alt_temps.mat', 'alt_temps'); % save the matrix to a .MAT file
 
 %% Practice 2.2
 clear;
@@ -98,21 +98,21 @@ clc;
 close all;
 
 c = 0:5:500;
-writematrix(c, 'C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_sample_data.csv');
+writematrix(c, 'Lecture Preparation\LecturePrep5_sample_data.csv');
 
 %% Load a .csv file
 clear;
 clc;
 close all;
 
-d = readmatrix('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_sample_data.csv');
+d = readmatrix('Lecture Preparation\LecturePrep5_sample_data.csv');
 
 %% Practice 3
 clear;
 clc;
 close all;
 
-x = readmatrix('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_xdata.csv');
-y = readmatrix('C:\Users\shell\OneDrive\文档\MATLAB\ENGR130\Lecture Preparation and Practice\LecturePrep5_ydata.csv');
+x = readmatrix('Lecture Preparation\xdata.csv');
+y = readmatrix('Lecture Preparation\ydata.csv');
 
 plot(x, y); % plotted a heart :)

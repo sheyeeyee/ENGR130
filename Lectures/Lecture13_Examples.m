@@ -1,3 +1,8 @@
+% Shelley Wei
+% ENGR 130
+% Lecture 13
+% 11/28/23
+
 %% Character Vectors
 clear;
 clc;

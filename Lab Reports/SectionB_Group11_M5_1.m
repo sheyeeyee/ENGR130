@@ -46,7 +46,7 @@ ylabel('Amplitude');
 title('Fourier Transform of the Composite Signal');
 
 % 4. Deconstruct a mystery signal
-load("mystery_signal.mat");%load the data that we need to analyze
+load("M5_mystery_signal.mat");%load the data that we need to analyze
 
 [fMystery, yMystery] = ENGR130_Fourier(time, mystery);
 % calculate the frequency and amplitude using the given fourier function
