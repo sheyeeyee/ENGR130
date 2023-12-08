@@ -50,7 +50,7 @@ userStar = input("\nPlease type the corresponding number to the star you would l
 [uName, uDist, uApp, uAbs] = userStarInfo(userStar, stars, name, dist, appMag, absMag); % use Function 4 to find the respective data for the user's star
 fprintf("Name: %s\nDistance from Earth: %.3f parsecs\nApparent Magnitude: %.3f\nAbsolute Magnitude: %.3f\n", uName, uDist, uApp, uAbs);
 
-starCalc = fopen("StarCalcs.txt", "w"); % open a new file to write data into
+starCalc = fopen("Homework\HW14_StarCalcs.txt", "w"); % open a new file to write data into
 
 % for-loop for inputting all of the original star data into the file and adding in absolute magnitude data
 for i = 1:stars
