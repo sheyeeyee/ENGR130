@@ -6,9 +6,10 @@ b = linspace(20, 1, 20)
 c = a ./ b 
 e = 1:length(c)
 
-for d = 1:length(b) 
-    e(d) = e(d) * 5 
-end 
+for d = 1:length(b)
+    e(d) = e(d) * 5; 
+end
+
 figure(1) 
 plot(b, a) 
 figure(2) 
