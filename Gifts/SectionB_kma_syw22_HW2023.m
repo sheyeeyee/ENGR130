@@ -15,12 +15,10 @@ inText = fopen("ChristmasLetter.txt", "r");
 letter = "";
 i = 1;
 
-while (fscanf(inText, "%s", 1) ~= "#")
-    letter(i) = fscanf(inText, "%s", 1);
-    i = i + 1;
-end
+letter = fscanf(inText, "%c");
 
 % remove "!!!"
+
 
 % remove "&&&"
 
