@@ -9,34 +9,20 @@
 %% CODE
 clear; clc; close all;
 
-% starting point
-inText = fopen("ChristmasLetter.txt", "r");
+inText = fopen("ChristmasLetter.txt", "r"); % open text file for reading
 
-letter = "";
-i = 1;
+letter = ""; % initialize letter variable to compile all words into
 
-letter = fscanf(inText, "%c");
+letter = fscanf(inText, "%c"); % scan characters of the text file to include spaces
 
 letter1 = removeExtra(letter, '!') % remove "!!!"
-letter2 = removeExtra(letter1, '&') % remove "&&&"
-letter3 = removeExtra(letter2, '+') % remove "+++"
-
+letter2 = removeExtra(letter1, '&'); % remove "&&&"
+letter3 = removeExtra(letter2, '+'); % remove "+++"
 
 %% Functions
 function letterNew = removeExtra(letterText, removeChar)
     numChar = length(letterText);
-    % count = 1;
     i = 1;
-
-    % for i = 1:numChar-count*3
-    %     if (letterText(i) == removeChar && letterText(i+1) == removeChar && letterText(i+2) == removeChar)
-    %         letterText(i+2) = [];
-    %         letterText(i+1) = [];
-    %         letterText(i) = [];
-    % 
-    %         count = count + 1;
-    %     end
-    % end
 
     while i <= numChar - i*3
         if (letterText(i) == removeChar && letterText(i+1) == removeChar && letterText(i+2) == removeChar)
@@ -48,5 +34,5 @@ function letterNew = removeExtra(letterText, removeChar)
         end
     end
 
-    letterNew = letterText;
+    letterNew = letterText
 end
