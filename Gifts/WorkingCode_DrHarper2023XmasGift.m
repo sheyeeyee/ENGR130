@@ -16,8 +16,8 @@ letter = ""; % initialize letter variable to compile all words into
 letter = fscanf(inText, "%c"); % scan characters of the text file to include spaces
 
 letter1 = removeExtra(letter, '!'); % remove "!!!"
-letter2 = removeExtra(letter, '&'); % remove "&&&"
-letter3 = removeExtra(letter, '+'); % remove "+++"
+letter2 = removeExtra(letter1, '&'); % remove "&&&" %*** should be letter1, not letter
+letter3 = removeExtra(letter2, '+'); % remove "+++" %*** should be letter2, not letter
 
 readableLetter = fopen("ReadableChristmasLetter.txt", "w"); % open new file to put readable letter into
 
@@ -31,15 +31,18 @@ function letterNew = removeExtra(letterText, removeChar)
     remove = [removeChar, removeChar, removeChar];
 
     i = 1;
+    count = 1; %*** need another counter
 
-    while i <= numChar - i*3
+    while i <= numChar - count*3 %*** use count to decrease the number to check through
         if (strcmp(letterText(i:i+2), remove))
-            letterText(i) = [];
-            letterText(i+1) = [];
+            %*** reverse the order of removing the characters otherwise you're removing the ones you want to keep
             letterText(i+2) = [];
-        
-            i = i + 1;
+            letterText(i+1) = [];
+            letterText(i) = [];
+
+            count = count + 1; %*** increment count here because only need to increment when characters are removed
         end
+        i = i + 1; %*** incrememnt i outside of if-statement because need to check through every character
     end
 
     letterNew = letterText;
