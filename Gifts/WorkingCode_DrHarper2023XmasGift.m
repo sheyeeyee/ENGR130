@@ -3,10 +3,7 @@
 % Started 12/6/23
 % Finished 12/17/23
 
-%% OBJECTIVE
-% Unveil the Christmas letter!
-
-%% CODE
+%% Working Code
 clear; clc; close all;
 
 inText = fopen("ChristmasLetter.txt", "r"); % open text file for reading
